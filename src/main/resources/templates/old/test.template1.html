@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- =========== tiles: TITLE =========== -->
+    <title> Caio Fabio - Pesquisa </title>
+    <!-- ==================================== -->  
+    
+    <meta charset="UTF-8">
+
+    <!-- sem cache no browser para as paginas da app  -->
+    <meta http-equiv="Pragma"        content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Expires"       content="0">
+    <meta name="author"              content="Claudio M. Silveira">
+    <meta name="keywords"            content="Evangelho de Jesus; Caio Fabio">
+    
+<!-- evitar as chamadas extras quando nao há favicon
+   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+ -->   
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABQ0lEQVQ4T63TvUoDQRAH8Jm50iKkVQt9Aitb0Vqw9iEyu+AHWghekECwkNu7K4W0YmVjIT5AOpG8gI3YmIuFlZDNXxauSA4TSOK2M/ObYZhlWvLxkvX0/0CWZave+5aIHIxGo5qI9ABcW2vv/pp2YoJQDKDLzPcAHBF9isiO9z4XkY6qtqvIBJAkSSeKor6qno4nllP1oijaVtW38dgEkKZpQURbxpj3aifn3C0zvxpj8qlAkiRDEVkxxvxUgTRN2wC+rbWtWRO8iMhZo9F4Hk8CwHmedwFcGWMepwLOuUMiaorInqp+hMSyOOzEFEWxEcfxcCoQAlmWnXvvT5j5gZn7zLxLROsA1gA0rbXxTKBENgHsA6iFxQ0Gg6d6vX7BzJdVZK5LdM7FJXJsrb0JzeYCQoFz7khEvlS1sxAw8xIX+Zm/m9eUEe4RhNoAAAAASUVORK5CYII=">
+    
+    <!-- ### CSS ### -->
+    <!-- Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <!-- app --> 
+    <link  rel="stylesheet"  href="css/template-full.css" />
+    <link  rel="stylesheet"  href="jquery/css/smoothness/jquery-ui-1.10.4.custom.full.css" />
+    
+    <!-- ### JAVASCRIPT de inicializaçãoo ### -->
+    <script src="jquery/jquery-2.1.1.min.js" ></script>
+    <script src="jquery/jquery-ui-1.10.4.custom.full.min.js" ></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+
+   <!-- =========== HEADER =========== -->        
+
+<script src="js/init.js"></script>
+
+<script src="js/ajaxsolr/Core.js"></script>
+<script src="js/ajaxsolr/AbstractManager.js"></script>
+<script src="js/ajaxsolr/Manager.jquery.js"></script>
+<script src="js/ajaxsolr/Parameter.js"></script>
+<script src="js/ajaxsolr/ParameterStore.js"></script>
+<script src="js/ajaxsolr/AbstractWidget.js"></script>
+<script src="js/ajaxsolr/AbstractTextWidget.js"></script>
+<script src="js/ResultWidget.js"></script>
+<script src="js/PagerWidget.js"></script>
+<script src="js/TextWidget.js"></script>
+<script src="js/solr.js"></script>
+<script type="text/javascript">
+   //Dados dos Matches
+   rootContext = "/cf";
+   letterIcon =  "image/carta2.png";
+   bookIcon =  "image/book.png";
+   vimeoIcon =  "image/vimeo.png";
+   loadergif =   'image/ajax-loader.gif';
+</script>
+  
+
+<header class="header-border">
+
+   <div class="header-logo" >
+        <img src="image/vvtv.png" alt="" >
+   </div>  
+      
+   <div class="header-form-container" >
+   
+        <div class="header-links" >
+            <a href="test.template2.html" target="_blank">Teste 2</a>
+            <a href="http://www.caiofabio.net/" target="_blank">Caio Fábio</a>
+            <a href="s/sel" >*Seleção!</a>        
+        </div>
+        
+         <!-- a solução anterior sem a tag form funcionava perfeito mas nao era submetida pelo 'enter' no teclado virtual de smartphones. -->  
+         <form class="form-horizontal"   onsubmit="return onSubmitSearch()" >
+           <div class="form-group">
+               <div class="inputSubmit">
+                      <input id="search" type="text" class="form-control inputSubmitText"  placeholder="Pesquisa" autocomplete="off">
+                      <button  type="submit" id="searchClick" class="btn btn-info inputSubmitButton my-btn-info"><span class="glyphicon glyphicon-search"></span></button>
+               </div>
+               <div class="checkTypeContainer" >
+                 <label class="radio  checkTypeList" >
+                     <input id="typedoc_all" type="radio" name="typedoc" value="{!q.op=OR}type:letter type:video type:book"  checked  />todos
+                 </label>
+                 <label class="radio  checkTypeList" >
+                     <input id="typedoc_letter" type="radio" name="typedoc" value="{!q.op=OR}type:letter"  />cartas
+                 </label>
+                 <label class="radio  checkTypeList" >
+                     <input id="typedoc_video" type="radio" name="typedoc" value="{!q.op=OR}type:video" />videos
+                 </label>
+                 <label class="radio  checkTypeList" >
+                     <input id="typedoc_book" type="radio" name="typedoc" value="{!q.op=OR}type:book" />livros
+                 </label>
+               </div>
+           </div>   
+         </form> 
+          
+         <div id=spellcheck></div>        
+   </div>   
+   
+   <div class="header-close"></div> 
+</header>
+   <!-- ========= FIM HEADER ========= -->    
+          
+       
+      <!-- =========== BODY =========== -->
+      <ul id="pager">
+         <li><span class="pager-disabled pager-prev">&lt;</span></li>
+         <li><span class="pager-current">1</span></li>
+         <li><a rel="next" href="#">2</a></li>
+         <li><a rel="" href="#">3</a></li>
+         <li><span class="pager-gap">…</span></li>
+         <li><a rel="" href="#">805</a></li>
+         <li><a rel="" href="#">806</a></li>
+         <li><a class="pager-next" rel="next" href="#">&gt;</a></li>
+      </ul>
+      <div id="pager-header">
+         <span>1 - 10 de 8056</span>
+      </div>
+
+      <ul id="docs">
+         <li><img class="docimage" src="image/book.png">
+         <div class="doctext">
+               <a class="doctitle"
+                  href="http://www.caiofabio.net/download.asp"
+                  target="_blank">Agrada-te do Senhor!</a>
+               <p>O Caminho da Graça www.caiofabio.net |
+                  www.vemevetv.com.br P á g in a 1 AGRADA-TE DO SENHOR!
+                  Caio Fábio Vamos ler o Salmo 37. 1 - 11 “Não te
+                  indignes por causa dos malfeitores, nem tenhas inveja
+                  dos que praticam a iniqüidade. Pois eles dentro em
+                  breve definharão como a relva e murcharão como a erva
+                  verde.</p>
+            </div></li>
+         <li><img class="docimage" src="image/book.png">
+         <div class="doctext">
+               <a class="doctitle"
+                  href="http://www.caiofabio.net/download.asp"
+                  target="_blank">Amor - o melhor caminho</a>
+               <p>© Caio Fábio D'Araújo Filho Capa e editoração
+                  eletrônica: Jonas Lemos Revisão: Maurício de S. Soares
+
+
+
+
+                  2' edição, 1997 Devidamente autorizado e com todos os
+                  direitos de publicação e distribuição dos títulos com
+                  a marca VINDE reservados á MZ Produções Culturais
+                  Ltda. SCRN 716 BI.</p>
+            </div></li>
+         <li><img class="docimage" src="image/book.png">
+         <div class="doctext">
+               <a class="doctitle"
+                  href="http://www.caiofabio.net/download.asp"
+                  target="_blank">As quatro maldições</a>
+               <p>AAss QQuuaattrroo MMaallddiiççõõeess Baseado no
+                  livro do Profeta Malaquias Caio Fábio Formatado por:
+
+                  HTTP://SEMEADORESDAPALAVRA.QUEROUMFORUM.COM Sentença
+                  pronunciada pelo Senhor contra Israel pelo profeta
+                  Malaquias. O que é interessante neste texto da Palavra
+                  de Deus pelo Profeta Malaquias é que se diz aqui que
+                  nós estamos lendo uma sentença. Vocês vejam que a
+                  maneira como o livro do Profeta Malaquias começa é
+                  extremamente jurídica e ele apela para uma solenidade
+                  enorme, porque Deus está falando.</p>
+            </div></li>
+         <li><img class="docimage" src="image/book.png">
+         <div class="doctext">
+               <a class="doctitle"
+                  href="http://www.caiofabio.net/download.asp"
+                  target="_blank">Avivamento total</a>
+               <p>
+                  <a class=""
+                     href="http://www.editoraprologos.com.br/detalhe.asp?IdProduto=19"
+                     target="_blank">Loja: Editora Pro Logos</a>
+               </p>
+               <p>AAvviivvaammeennttoo TToottaall Caio Fábio Revisão
+                  e formatação:
+
+
+
+                  HTTP://SEMEADORESDAPALAVRA.QUEROUMFORUM.COM PALAVRAS
+                  EXPLICATIVAS Este livro é o resultado das palestras
+                  que fiz no 9º Congresso VINDE Para Pastores e Líderes
+                  em Serra Negra, São Paulo, em setembro de 1992. Os
+                  traços do estilo falado podem ser claramente
+                  percebidos na forma do texto que foi mantido. Fiz isto
+                  de propósito.</p>
+            </div></li>
+         <li><img class="docimage" src="image/book.png">
+         <div class="doctext">
+               <a class="doctitle"
+                  href="http://www.caiofabio.net/download.asp"
+                  target="_blank">Batalha Espiritual</a>
+               <p>- 2 - SUMÁRIO INTRODUÇÃO 4 CAPÍTULO I 6 Aspectos
+                  positivos e negativos da Batalha Espiritual CAPÍTULO
+                  II 16 Discernindo práticas e percepções perigosas
+
+                  CAPÍTULO III 21 Discernindo principados e potestades
+
+                  CAPÍTULO IV 38 Discernindo nossas relações com os
+                  principados e as potestades CAPÍTULO V 43 Discernindo
+                  as forças históricas na Batalha Espiritual CAPÍTULO VI
+                  48 Discernindo os três níveis de Batalha Espiritual
+
+                  CAPÍTULO VII 66 Discernindo os elementos da fe cristã
+
+                  CAPÍTULO VIII 80 Como estar preparado para vencer
+                  principados e potestades CONCLUSÃO 94 - 3 -
+
+                  APRESENTAÇÃO Eu era recém-convertida quando, pela
+                  primeira vez, vi uma pessoa possessa. Foi em 1973, em
+                  Manaus, na casa de meu sogro. Um homem estava tomado
+                  por demônios, e estes resistiam, até que, em nome de
+                  Jesus, saíram daquele corpo.</p>
+            </div></li>
+         <li><img class="docimage" src="image/book.png">
+         <div class="doctext">
+               <a class="doctitle"
+                  href="http://www.caiofabio.net/download.asp"
+                  target="_blank">Bons piados para todos vocês</a>
+               <p>
+                  <a class=""
+                     href="http://www.editoraprologos.com.br/detalhe.asp?IdProduto=1086"
+                     target="_blank">Loja: Editora Pro Logos</a>
+               </p>
+               <p>O Caminho da Graça www.caiofabio.net |
+                  www.vemevetv.com.br P á g in a 1 BONS PIADOS PARA
+                  TODOS VOCÊS! Caio Fábio Vamos ler o Salmo 77 “Elevo a
+                  Deus a minha voz e clamo, elevo a Deus a minha voz,
+                  para que me atenda. No dia da minha angústia, procuro
+                  o Senhor; erguem-se as minhas mãos durante a noite e
+                  não se cansam; a minha alma recusa consolar-se.</p>
+            </div></li>
+         <li><img class="docimage" src="image/book.png">
+         <div class="doctext">
+               <a class="doctitle"
+                  href="http://www.caiofabio.net/download.asp"
+                  target="_blank">Brincadeira de gente grande</a>
+               <p>
+                  <a class=""
+                     href="http://www.editoraprologos.com.br/detalhe.asp?IdProduto=18"
+                     target="_blank">Loja: Editora Pro Logos</a>
+               </p>
+               <p>Brincadeira de Gente Grande Aos que ainda podem
+                  desaprender o mau humor e abraçar com alegria as
+                  brincadeiras de gente grande. Fábrica de Esperança Rio
+                  de Janeiro Outono de 1998 Sumário Capítulo 1 A Doença
+                  da
+                  Insatisfação................................................................................5
+
+
+
+                  Capítulo 2 Fuja das Formas, Siga
+                  Princípios....................................................................15
+
+
+
+                  Capítulo 3 A Crise Pode Tornar-nos Mais
+                  Profundos......................................................24
+
+
+
+                  Capítulo 4 Faça a Escolha
+                  Certa........................................................................................35
+
+
+
+                  Perguntas dos Meninos e das
+                  Meninas............................................................43
+
+
+                  Apresentação Você tem parado para brincar? Muita gente
+                  cresce e se esquece de que a brincadeira é parte da
+                  vida.</p>
+            </div></li>
+         <li><img class="docimage" src="image/book.png">
+         <div class="doctext">
+               <a class="doctitle"
+                  href="http://www.caiofabio.net/download.asp"
+                  target="_blank">Brota, ó poço! Entoai-lhe
+                  cânticos!</a>
+               <p>
+                  <a class=""
+                     href="http://www.editoraprologos.com.br/detalhe.asp?IdProduto=1089"
+                     target="_blank">Loja: Editora Pro Logos</a>
+               </p>
+               <p>O Caminho da Graça www.caiofabio.net |
+                  www.vemevetv.com.br P á g in a 1 Brota, ó poço!
+                  Entoai-lhe cânticos! Caio Fábio Nós vamos ler em
+                  Números 21:10-20...</p>
+            </div></li>
+         <li><img class="docimage" src="image/book.png">
+         <div class="doctext">
+               <a class="doctitle"
+                  href="http://www.caiofabio.net/download.asp"
+                  target="_blank">Confissões do pastor</a>
+               <p>
+                  <a class=""
+                     href="http://www.editoraprologos.com.br/detalhe.asp?IdProduto=1185"
+                     target="_blank">Loja: Editora Pro Logos</a>
+               </p>
+               <p>Apresentação Era uma vez um jovem rebelde,
+                  arruaceiro e dissoluto que amava “alucinadamente” as
+                  mulheres e fumava maconha e cheirava cocaína no mesmo
+                  ritmo que dirigia sua moto — mais do que uma alma
+                  perdida, era a promessa de um legítimo cafajeste. Um
+                  dia, esse moço acordou aos gritos achando que estava
+                  com uma cobra sucuri enrolada no corpo, mordendo-lhe o
+                  braço e inoculando-lhe veneno. Era uma visão, claro,
+                  não uma cena real, mas foi como se fosse.</p>
+            </div></li>
+         <li><img class="docimage" src="image/book.png">
+         <div class="doctext">
+               <a class="doctitle"
+                  href="http://www.caiofabio.net/download.asp"
+                  target="_blank">Cristo - a opção da esperança</a>
+               <p>CCrriissttoo,, OOppççããoo PPeellaa
+                  EEssppeerraannççaa Caio Fábio VINDE Comunicações, 1993
+
+                  Formatado por:
+
+                  HTTP://SEMEADORESDAPALAVRA.QUEROUMFORUM.COM * * *
+
+
+                  Jesus, porém, ouvindo que João estava preso, voltou
+                  para a Galiléia; E, deixando Nazaré, foi habitar em
+                  Cafarnaum, cidade marítima, nos confins de Zebulom e
+                  Naftali; para que se cumprisse o que foi dito pelo
+                  profeta Isaías, que diz: Terra de Zebulom, terra de
+                  Naftali, junto ao caminho do mar, além do Jordão, a
+                  Galiléia das nações; o povo, que estava assentado em
+                  trevas, viu uma grande luz; e aos que estavam
+                  assentados na região e sombra da morte a luz raiou.
+                  Desde então Jesus começou a pregar, e a dizer:
+                  Arrependei-vos, porque é chegado o reino dos céus.
+                  (Mateus, 4:12-17).</p>
+            </div></li>
+      </ul>
+
+      <ul id="pager2">
+         <li><span class="pager-disabled pager-prev">&lt;</span></li>
+         <li><span class="pager-current">1</span></li>
+         <li><a rel="next" href="#">2</a></li>
+         <li><a rel="" href="#">3</a></li>
+         <li><span class="pager-gap">…</span></li>
+         <li><a rel="" href="#">805</a></li>
+         <li><a rel="" href="#">806</a></li>
+         <li><a class="pager-next" rel="next" href="#">&gt;</a></li>
+      </ul>
+      <div id="pager-header2">
+         <span>1 - 10 de 8056</span>
+      </div>
+
+
+
+      <!-- ========= FIM BODY ========= -->
+
+               
+
+</div> <!-- end main container -->
+
+<div id="footer" >
+    <span class="text-muted">Copyright &copy; Caio Fabio 2016</span>
+</div>   
+
+</body>
+</html>
+
+
+
+
+
+

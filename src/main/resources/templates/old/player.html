@@ -1,0 +1,206 @@
+<html lang="pt-br">
+<head>
+
+<!-- =========== tiles: TITLE =========== -->
+<title>Caio Fabio - Player</title>
+<!-- ==================================== -->
+
+<meta charset="ISO-8859-1">
+
+<!-- sem cache no browser para as paginas da app  -->
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="author" content="Claudio M. Silveira">
+<meta name="keywords" content="Evangelho de Jesus; Caio Fabio">
+
+<!-- evitar as chamadas extras quando nao há favicon
+   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+ -->
+<link rel="icon"
+   href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABQ0lEQVQ4T63TvUoDQRAH8Jm50iKkVQt9Aitb0Vqw9iEyu+AHWghekECwkNu7K4W0YmVjIT5AOpG8gI3YmIuFlZDNXxauSA4TSOK2M/ObYZhlWvLxkvX0/0CWZave+5aIHIxGo5qI9ABcW2vv/pp2YoJQDKDLzPcAHBF9isiO9z4XkY6qtqvIBJAkSSeKor6qno4nllP1oijaVtW38dgEkKZpQURbxpj3aifn3C0zvxpj8qlAkiRDEVkxxvxUgTRN2wC+rbWtWRO8iMhZo9F4Hk8CwHmedwFcGWMepwLOuUMiaorInqp+hMSyOOzEFEWxEcfxcCoQAlmWnXvvT5j5gZn7zLxLROsA1gA0rbXxTKBENgHsA6iFxQ0Gg6d6vX7BzJdVZK5LdM7FJXJsrb0JzeYCQoFz7khEvlS1sxAw8xIX+Zm/m9eUEe4RhNoAAAAASUVORK5CYII=">
+
+<!-- ### CSS ### -->
+<!-- Bootstrap -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/cf/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+   media="screen">
+<!-- app -->
+<link rel="stylesheet" href="/cf/css/search.css">
+<link rel="stylesheet"
+   href="/cf/jquery/css/smoothness/jquery-ui-1.10.4.custom.full.css">
+
+<!-- ### JAVASCRIPT de inicializaçãoo ### -->
+<script type="text/javascript" id="www-widgetapi-script"
+   src="https://s.ytimg.com/yts/jsbin/www-widgetapi-vflp5jaZ8/www-widgetapi.js"
+   async=""></script>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script src="/cf/jquery/jquery-2.1.1.min.js"></script>
+<script src="/cf/jquery/jquery-ui-1.10.4.custom.full.min.js"></script>
+<script src="/cf/bootstrap/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+   <div class="container">
+
+      <!-- =========== HEADER =========== -->
+
+
+
+
+
+
+      <script src="/cf/js/init.js"></script>
+
+      <script src="/cf/js/ajaxsolr/Core.js"></script>
+      <script src="/cf/js/ajaxsolr/AbstractManager.js"></script>
+      <script src="/cf/js/ajaxsolr/Manager.jquery.js"></script>
+      <script src="/cf/js/ajaxsolr/Parameter.js"></script>
+      <script src="/cf/js/ajaxsolr/ParameterStore.js"></script>
+      <script src="/cf/js/ajaxsolr/AbstractWidget.js"></script>
+      <script src="/cf/js/ajaxsolr/AbstractTextWidget.js"></script>
+      <script src="/cf/js/ResultWidget.js"></script>
+      <script src="/cf/js/PagerWidget.js"></script>
+      <script src="/cf/js/TextWidget.js"></script>
+      <script src="/cf/js/solr.js"></script>
+      <script type="text/javascript">
+							//Dados dos Matches
+							rootContext = "/cf";
+							letterIcon = "/cf/image/carta2.png";
+							bookIcon = "/cf/image/book.png";
+							vimeoIcon = "/cf/image/vimeo.png";
+							loadergif = '/cf/image/ajax-loader.gif';
+						</script>
+
+
+
+
+      <header class="header-border">
+
+         <div class="header-logo">
+            <img src="/cf/image/vvtv.png" alt="">
+         </div>
+
+         <div class="header-form-container">
+
+            <div class="header-links">
+               <a href="http://www.vemevetv.com.br/" target="_blank">Vem&amp;vê
+                  TV</a> <a href="http://www.caiofabio.net/" target="_blank">Caio
+                  Fábio</a> <a href="/cf/s/sel">*Seleção!</a>
+            </div>
+
+            <!-- a solução anterior sem a tag form funcionava perfeito mas nao era submetida pelo 'enter' no teclado virtual de smartphones. -->
+            <form class="form-horizontal"
+               onsubmit="return onSubmitSearch()">
+               <div class="form-group">
+                  <div class="inputSubmit">
+                     <span role="status" aria-live="polite"
+                        class="ui-helper-hidden-accessible"></span><input
+                        id="search" type="text"
+                        class="form-control inputSubmitText ui-autocomplete-input"
+                        placeholder="Pesquisa" autocomplete="off">
+                     <button type="submit" id="searchClick"
+                        class="btn btn-info inputSubmitButton my-btn-info">
+                        <span class="glyphicon glyphicon-search"></span>
+                     </button>
+                  </div>
+                  <div class="checkTypeContainer">
+                     <label class="radio  checkTypeList"> <input
+                        id="typedoc_all" type="radio" name="typedoc"
+                        value="{!q.op=OR}type:letter type:video type:book"
+                        checked="">todos
+                     </label> <label class="radio  checkTypeList"> <input
+                        id="typedoc_letter" type="radio" name="typedoc"
+                        value="{!q.op=OR}type:letter">cartas
+                     </label> <label class="radio  checkTypeList"> <input
+                        id="typedoc_video" type="radio" name="typedoc"
+                        value="{!q.op=OR}type:video">videos
+                     </label> <label class="radio  checkTypeList"> <input
+                        id="typedoc_book" type="radio" name="typedoc"
+                        value="{!q.op=OR}type:book">livros
+                     </label>
+                  </div>
+               </div>
+            </form>
+
+            <div id="spellcheck"></div>
+
+
+         </div>
+         <div class="header-close"></div>
+
+
+
+      </header>
+
+
+
+
+
+
+
+
+
+
+
+      <!-- ========= FIM HEADER ========= -->
+
+
+      <!-- =========== BODY =========== -->
+
+
+
+
+      <script src="/cf/js/youtube.js"></script>
+      <script type="text/javascript">
+							//Dados dos Matches
+							rootContext = "/cf";
+							matches = [ 6008, 6008 ];
+							videoid = 'Wd0iYodvXgM';
+						</script>
+
+
+      <center>
+         <iframe id="player" frameborder="0" allowfullscreen="1"
+            title="YouTube video player" width="640" height="390"
+            src="https://www.youtube.com/embed/Wd0iYodvXgM?autoplay=0&amp;start=0&amp;widget_referrer=http%3A%2F%2Flocalhost%3A8080%2Fcf%2Fs%2F&amp;enablejsapi=1&amp;origin=http%3A%2F%2Flocalhost%3A8080"></iframe>
+         <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+         <div id="timeline-container">
+            <canvas id="timeline" width="640" height="30"> </canvas>
+            <div id="timeline-ctrl" style="display: block;">
+               <input id="timeline-prev" class="btn btn-default"
+                  type="button" onclick="clickPrev()" value="<<">
+               &nbsp; <input id="timeline-next" class="btn btn-default"
+                  type="button" onclick="clickNext()" value=">>">
+               &nbsp; <span id="timeline-tip"></span>
+            </div>
+         </div>
+      </center>
+
+      <!-- ========= FIM BODY ========= -->
+
+
+   </div>
+   <!-- end main container -->
+
+   <div id="footer">
+
+
+      <span class="text-muted">Copyright © Caio Fabio 2016</span>
+   </div>
+
+
+
+
+
+
+
+
+
+   <ul
+      class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ui-corner-all"
+      id="ui-id-1" tabindex="0" style="display: none;"></ul>
+</body>
+</html>

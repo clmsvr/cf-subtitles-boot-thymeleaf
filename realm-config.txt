@@ -1,0 +1,63 @@
+
+Configuração acrescentada em : META-INF/context.xml
+
+
+You can select digested passwords by specifying the digest attribute on your 
+<Realm> element. 
+The value for this attribute must be one of the digest algorithms supported by 
+the java.security.MessageDigest class (SHA, MD2, or MD5). 
+
+
+        
+Tableas de Autentificação:
+
+-- ORACLE   
+create table user (
+  username    varchar2(20) not null,
+  pwd         varchar2(200) not null,
+  primary key (username)
+);
+
+create table user_role (
+  username     varchar2(20) not null,
+  role         varchar2(20) not null,
+  primary key (username, role)
+);
+
+
+
+--MySQL
+
+create table user (
+  email    varchar(100) not null primary key,
+  pwd      varchar(200) not null
+  ...
+)ENGINE=InnoDB 
+;
+
+create table user_role (
+  email        varchar(100) not null,
+  role         varchar(20)  not null,
+  primary key (email, role)
+)ENGINE=InnoDB 
+;
+
+
+-- Queries uteis MySql
+
+select * from user;
+select * from user_role;
+
+aaaalter table user modify pwd varchar(200)  not null;
+aaaalter table user_role change user_name email varchar(100) not null;
+
+
+INSERT INTO user(email, pwd, name, sys_creation_date, sys_update_date) 
+    VALUES('admin@admin', sha2('123',512), 'Administrador', sysdate(), sysdate());
+INSERT INTO user_role (email, role )
+select 'admin@admin' , 'admin';
+
+
+//alterar senha
+update user set pwd = sha2('123',512) where username='admin';
+

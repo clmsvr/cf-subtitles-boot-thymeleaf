@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="pt-br">
+
+
+<head>
+
+	<!-- =========== TITLE =========== -->
+    <title> Caio Fabio - Player </title>
+    <!-- ==================================== -->  
+
+	<meta th:include="~{fragments-search :: head}"  th:remove="tag" ></meta>
+	    
+</head>
+      
+<body>
+
+<div class="container">
+
+
+   <!-- =========== BODY =========== -->        
+
+
+<script th:src="@{/js/youtube.js}"></script> 
+<script type="text/javascript"  th:inline="javascript">
+   //Dados dos Matches
+   rootContext = "[[@{}]]";
+   matches =  /*[[${matches}]]*/ [];    
+   videoid = '[[${videoid}]]';
+</script>
+    
+ 
+<center>
+    <div id="player"></div> <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+    <div id="timeline-container">
+      <canvas id="timeline"> </canvas>
+      <div id="timeline-ctrl">
+            <input id="timeline-prev" class="btn btn-default" type="button" onclick="clickPrev()" value="<<">
+            &nbsp;
+            <input id="timeline-next" class="btn btn-default" type="button" onclick="clickNext()" value=">>">
+            &nbsp;
+            <span id="timeline-tip"></span>
+      </div>          
+    </div>   
+</center>
+
+
+   <!-- ========= FIM BODY ========= -->  
+               
+</div> <!-- end main container -->
+
+<div th:replace="~{fragments-search :: footer}"></div>
+
+</body>
+</html>

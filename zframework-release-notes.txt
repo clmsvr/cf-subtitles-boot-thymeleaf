@@ -1,0 +1,28 @@
+Versão 5 - 09-02-2016
+- remoção das classes do Struts2 e funcionalidades dependentes. Ex: breadcrumb
+- suporte para Spring
+- arquivos em utf-8
+- gerenciamento de dependencias via Apache Ivy
+- usando HikariCP como implementacao do Connection Pool no Tomcat. Melhoria de qualidade.
+- Definido modelo CSS template para ser copiado: template-full.css
+- "datasource.ini" para configurar classe "AbstractDao" sem hard codes.
+
+Versão 4 (evoluido com aplicação da Flora)
+- struts 2.2.3.1
+- inclusão de realm para Banco de Dados
+- atualização para DJBeans version 0.11 30/11/2011
+- atualização do xml de exemplo do DJBeans
+- configuração de sessão ilimitada no web.xml
+- atualização do jar MySql
+- implementacao do ServiceLocator
+- renameado packeage com.claro.framework2 para webframework
+- remo��o de copyrights
+- adicao das classes basicas para criacao de Daos: webframework.dao.*
+- adicao das classes utilitarias: webframework.util.*
+
+- adicao de classe basica para Actions
+- implementação de breadcrumb trail
+- Dao com estrutura para varias opera�oes em uma transação
+- implementação do atalho de boltar.
+
+

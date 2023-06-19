@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="pt-br">
+
+
+<head>
+
+	<!-- =========== TITLE =========== -->
+    <title> Caio Fabio - Pesquisa </title>
+    <!-- ==================================== -->  
+
+	<meta th:include="~{fragments-search :: head}"  th:remove="tag" ></meta>
+	    
+</head>
+      
+<body>
+
+<div class="container">
+
+   <!-- =========== HEADER =========== -->       
+    
+<script th:src="@{/js/init.js}"></script>
+
+<script th:src="@{/js/ajaxsolr/Core.js}"></script>
+<script th:src="@{/js/ajaxsolr/AbstractManager.js}"></script>
+<script th:src="@{/js/ajaxsolr/Manager.jquery.js}"></script>
+<script th:src="@{/js/ajaxsolr/Parameter.js}"></script>
+<script th:src="@{/js/ajaxsolr/ParameterStore.js}"></script>
+<script th:src="@{/js/ajaxsolr/AbstractWidget.js}"></script>
+<script th:src="@{/js/ajaxsolr/AbstractTextWidget.js}"></script>
+<script th:src="@{/js/ResultWidget.js}"></script>
+<script th:src="@{/js/PagerWidget.js}"></script>
+<script th:src="@{/js/TextWidget.js}"></script>
+<script th:src="@{/js/solr.js}"></script>
+<script type="text/javascript"  th:inline="javascript">
+   //Dados dos Matches
+   rootContext = "[[@{}]]";
+   letterIcon =  "[[@{/image/carta2.png}]]";
+   bookIcon =    "[[@{/image/book.png}]]"; 
+   vimeoIcon =   "[[@{/image/vimeo.png}]]";
+   loadergif =   '[[@{/image/ajax-loader.gif}]]'; 
+</script>
+  
+
+<header class="header-border">
+
+   <div class="header-logo" >
+        <img th:src="@{/image/vvtv.png}" alt="" >
+   </div>  
+      
+   <div class="header-form-container" >
+   
+        <div class="header-links" >
+            <a href="http://www.vemevetv.com.br/" target="_blank">Vem&v� TV</a>
+            <a href="http://www.caiofabio.net/" target="_blank">Caio F�bio</a>
+            <a th:href="@{/s/sel}" >Sele��o</a>    
+            <a th:href="@{/s/legendas}" >Participe!!</a>     
+        </div>
+        
+         <!-- a solucao anterior sem a tag form funcionava perfeito mas nao era submetida pelo 'enter' no teclado virtual de smartphones. -->  
+         <form class="form-horizontal"   onsubmit="return onSubmitSearch()" >
+           <div class="form-group">
+               <div class="inputSubmit">
+                      <input id="search" type="text" class="form-control inputSubmitText"  placeholder="Pesquisa" autocomplete="off">
+                      <button  type="submit" id="searchClick" class="btn btn-info inputSubmitButton my-btn-info"><span class="glyphicon glyphicon-search"></span></button>
+               </div>
+               <div class="checkTypeContainer" >
+                 <label class="radio  checkTypeList" >
+                     <input id="typedoc_all" type="radio" name="typedoc" value="{!q.op=OR}type:letter type:video type:book"  checked  />todos
+                 </label>
+                 <label class="radio  checkTypeList" >
+                     <input id="typedoc_letter" type="radio" name="typedoc" value="{!q.op=OR}type:letter"  />cartas
+                 </label>
+                 <label class="radio  checkTypeList" >
+                     <input id="typedoc_video" type="radio" name="typedoc" value="{!q.op=OR}type:video" />videos
+                 </label>
+                 <label class="radio  checkTypeList" >
+                     <input id="typedoc_book" type="radio" name="typedoc" value="{!q.op=OR}type:book" />livros
+                 </label>
+               </div>
+           </div>   
+         </form> 
+          
+         <div id=spellcheck></div>        
+     
+           
+   </div>   
+   <div class="header-close"> </div>
+
+                   
+    
+</header>
+
+   <!-- ========= FIM HEADER ========= -->    
+          
+       
+   <!-- =========== BODY =========== -->        
+<ul id="pager"></ul>
+<div id="pager-header"></div>
+
+<ul id="docs"></ul>
+
+<ul id="pager2"></ul>
+<div id="pager-header2"></div> 
+   <!-- ========= FIM BODY ========= -->  
+               
+
+</div> <!-- end main container -->
+
+<div th:replace="~{fragments-search :: footer}"></div>
+
+</body>
+</html>
+
+
+
+
+
+

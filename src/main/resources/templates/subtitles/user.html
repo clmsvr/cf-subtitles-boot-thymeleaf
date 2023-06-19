@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="pt-br">
+
+<head>
+
+	<!-- =========== TITLE =========== -->
+    <title> Caio Fabio - Legendas </title>
+    <!-- ==================================== -->  
+
+	<meta th:include="~{fragments :: head}"  th:remove="tag" ></meta>
+	    
+</head>  
+     
+<body>
+
+<div class="container">
+
+   <div th:replace="~{fragments :: header}"></div>   
+
+   <!-- =========== BODY =========== -->        
+
+
+<br>
+<p>Bem vindo ao nosso sistema de legendas. Participe!</p>
+
+<div  th:if="${allocated_block} != null"  th:remove="tag" >
+
+     <p>Você já possui um Bloco de legendas alocado para trabalhar! </p>
+
+     <a href="${pageContext.request.contextPath}/s/legendas/worker/alocatedBlock?block=${allocated_block}">Ir para o Bloco Alocado.</a></li>
+</div>
+
+<div  th:unless="${allocated_block} != null"  th:remove="tag" >
+
+      <p class="blue-text"  th:if="${param.msg_alocado} != null" >Você já possui um bloco alocado!!!</p>
+      <p class="red-text"   th:if="${param.msg_fail} != null" >Desculpe! ocorreu uma falha na alocação, Tente novamente, por favor.</p>
+      <p class="green-text" th:if="${param.msg_finalized} != null" >Blooco finalizado com sucesso!</p>
+      <p class="red-text"   th:if="${param.no_block_pt} != null" >No momento, não temos novos blocos para legendar em PT. Por favor, aguarde nova publicação.</p>
+      <p class="red-text"   th:if="${param.no_block_en} != null" >No momento, não temos novos blocos para legendar em EN. Por favor, aguarde nova publicação.</p>
+
+
+    <!-- 
+    hasAnyRole
+    hasRole
+     -->             
+      <div sec:authorize="hasAnyRole('worker', 'admin')" th:remove="tag"  >
+         
+         <p>Aloque um bloco de legendas de aproximadamente 5 minutos 
+         para trabalhar, clicando nos botões abaixo. </p>      
+      
+         <form class="home-form" th:action="@{/s/legendas/worker/participate}"  method="post" >
+            <input type="submit" name="subtitling-pt" value="Legendar em Português">
+            <input type="submit" name="subtitling-eng" value="Legendar em Inglês">
+         </form>
+         
+         <p>Cada boco de 5 minutos ficará alocado por um periodo de tempo limitado. </p>
+         
+      </div>
+</div>             
+
+<br/>
+
+
+<p>Blocos finalizados:</p>
+
+<div class="block-list" th:each="c : ${finishedBlocks}" >
+     <p th:text="${c.title} + '-' +  (${c.locale})" ></p>
+     
+     <ul  th:each="c2,iter : ${c.list}">
+           <li><a href="@{/s/legendas/worker/alocatedBlock?block=${c2.id}&toedit=1}" th:text="${iter.count}" ></a></li></li>
+     </ul>
+     <br><br>
+</div>
+
+   <!-- ========= FIM BODY ========= -->  
+
+<!--                
+<p>Roles:</p>               
+<span sec:authentication="principal.authorities"></span>
+ -->
+ 
+</div> <!-- end main container -->
+
+
+<div th:replace="~{fragments :: footer}"></div>
+
+</body>
+</html>

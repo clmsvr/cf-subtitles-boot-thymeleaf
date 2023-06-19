@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="pt-br">
+
+
+<head>
+
+	<!-- =========== TITLE =========== -->
+    <title> title </title>
+    <!-- ==================================== -->  
+
+	<meta th:include="~{fragments-search :: head}"  th:remove="tag" ></meta>
+	    
+</head>
+      
+<body>
+
+<div class="container">
+
+
+   <!-- =========== BODY =========== -->        
+
+
+   <!-- ========= FIM BODY ========= -->  
+               
+
+</div> <!-- end main container -->
+
+<div th:replace="~{fragments-search :: footer}"></div>
+
+</body>
+</html>
+
+
+
+
+
+

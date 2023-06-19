@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+                                   "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <!-- Search -->
+	<definition name="search" template="/WEB-INF/tiles/search/template.jsp">
+		<put-attribute name="title"   value="Caio Fabio - Pesquisa" />
+		<put-attribute name="header"  value="/WEB-INF/tiles/search/header.jsp" />
+		<put-attribute name="body"    value="/WEB-INF/tiles/search/body.jsp" />
+	</definition>
+    	
+	<definition name="player_youtube" extends="search">
+	    <put-attribute name="title"   value="Caio Fabio - Player" />
+		<put-attribute name="body" value="/WEB-INF/tiles/search/player_youtube.jsp" />
+	</definition>
+
+    <definition name="player_vimeo" extends="search">
+        <put-attribute name="title"   value="Caio Fabio - Player" />
+        <put-attribute name="body" value="/WEB-INF/tiles/search/player_vimeo.jsp" />
+    </definition>
+
+    <definition name="selected" extends="search">
+        <put-attribute name="title"   value="Caio Fabio - Seleções" />
+        <put-attribute name="body" value="/WEB-INF/tiles/search/selected.jsp" />
+    </definition>
+        	
+
+    <!-- Subtitles Public-->    	
+    <definition name="subtitles" template="/WEB-INF/tiles/subtitles/template.jsp">
+        <put-attribute name="title"   value="Caio Fabio - Legendas" />
+        <put-attribute name="body"    value="/WEB-INF/tiles/subtitles/home.jsp" />
+    </definition>
+
+    <definition name="subtitles-user" template="/WEB-INF/tiles/subtitles/template.jsp">
+        <put-attribute name="title"   value="Caio Fabio - Legendas" />
+        <put-attribute name="body"    value="/WEB-INF/tiles/subtitles/user.jsp" />
+    </definition>
+
+    <definition name="register-form" extends="subtitles">
+        <put-attribute name="title"   value="Legendas - Registro" />
+        <put-attribute name="body"    value="/WEB-INF/tiles/subtitles/register-form.jsp" />
+    </definition>
+    
+    <definition name="register-resp" extends="subtitles">
+        <put-attribute name="title"   value="Legendas - Registro" />
+        <put-attribute name="body"    value="/WEB-INF/tiles/subtitles/register-resp.jsp" />
+    </definition>
+
+    <definition name="confirm-form" extends="subtitles">
+        <put-attribute name="title"   value="Legendas - Confirmação de Senha" />
+        <put-attribute name="body"    value="/WEB-INF/tiles/subtitles/confirm-form.jsp" />
+    </definition>
+
+    <definition name="account-form" extends="subtitles">
+        <put-attribute name="title"   value="Legendas - Conta" />
+        <put-attribute name="body"    value="/WEB-INF/tiles/subtitles/account-form.jsp" />
+    </definition>
+
+    <definition name="change-pwd-form" extends="subtitles">
+        <put-attribute name="title"   value="Legendas - Alterar Senha" />
+        <put-attribute name="body"    value="/WEB-INF/tiles/subtitles/change-pwd-form.jsp" />
+    </definition>
+
+    <definition name="reset-pwd-form" extends="subtitles">
+        <put-attribute name="title"   value="Legendas - Reset Senha" />
+        <put-attribute name="body"    value="/WEB-INF/tiles/subtitles/reset-pwd-form.jsp" />
+    </definition>
+    
+    <definition name="reset-confirm-form" extends="subtitles">
+        <put-attribute name="title"   value="Legendas - Reset Senha" />
+        <put-attribute name="body"    value="/WEB-INF/tiles/subtitles/reset-confirm-form.jsp" />
+    </definition>
+ 
+    <definition name="reset-confirm-resp" extends="subtitles">
+        <put-attribute name="title"   value="Legendas - Reset Senha" />
+        <put-attribute name="body"    value="/WEB-INF/tiles/subtitles/reset-confirm-resp.jsp" />
+    </definition>
+       
+    <!-- Subtitles Worker -->
+    
+    <!-- Subtitles Tool -->
+    <definition name="tool" template="/WEB-INF/tiles/subtitles/tool.jsp">
+        <put-attribute name="title"   value="Legendas - Participação" />
+    </definition>
+    
+    <!-- Paginas Gerais -->    
+    <definition name="form-login" extends="subtitles">
+        <put-attribute name="title"   value="Legendas - Login" />
+        <put-attribute name="body"    value="/WEB-INF/tiles/general/form-login.jsp" />
+    </definition>
+    
+    <definition name="error-page" extends="subtitles">
+        <put-attribute name="title"   value="Legendas - Oops..." />
+        <put-attribute name="body"    value="/WEB-INF/tiles/general/error.jsp" />
+    </definition>
+              
+    <definition name="json_ok" template="/WEB-INF/tiles/general/json_ok.jsp">
+    </definition>     
+    
+    <definition name="text" template="/WEB-INF/tiles/general/text.jsp">
+    </definition>  
+                       	
+</tiles-definitions>
+

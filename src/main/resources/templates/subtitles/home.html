@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="pt-br">
+
+<head>
+
+	<!-- =========== TITLE =========== -->
+    <title> Caio Fabio - Legendas </title>
+    <!-- ==================================== -->  
+
+	<meta th:include="~{fragments :: head}"  th:remove="tag" ></meta>
+	    
+</head>   
+     
+<body>
+
+<div class="container">
+
+   <div th:replace="~{fragments :: header}"></div>   
+
+   <!-- =========== BODY =========== -->        
+
+
+<p>Bem vindo ao nosso sistema de legendas. Participe!</p>
+<p>Atualemte temos:</p>
+
+<ul>
+<li>N Blocos Legendados em Portugês, em N Videos</li>
+<li>N Blocos Legendados em Inglês, em N Videos</li>
+<li>N Participantes</li>
+</ul>
+
+<p>Queremos contar com toda ajuda possível.</p>
+
+<p>Faça o Login (ou cadastre-se) e aloque um bloco de legendas de aproximadamente 5 minutos 
+para trabalhar.</p>
+
+
+<p>Videos sendo legendados:</p>
+
+<ul>
+<li>Imagem </li>
+<li>Titulo</li>
+<li>Numero de blocos legendados</li>
+<li>Numero de blocos restantes</li>
+<li>Participantes (link para perfil)</li>
+</ul>
+
+
+   <!-- ========= FIM BODY ========= -->  
+
+</div> <!-- end main container -->
+
+<div th:replace="~{fragments :: footer}"></div>
+
+</body>
+</html>

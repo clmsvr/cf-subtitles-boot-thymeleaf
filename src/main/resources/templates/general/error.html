@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+	<meta charset="UTF-8"/>
+	<title>Legendas - Oops...</title>
+</head>
+
+<body>
+
+<h1 style="color:red;">
+     <img style="vertical-align: middle;" 
+          th:src="@{/image/error.png}"   />
+     <span></span> 
+</h1>
+
+<h3>Desculpe, mas ocorreu um erro em seu acesso ao sistema.</h3>
+<h3>Detalhes:</h3>
+
+
+<ul th:switch="${pageContext.errorData.statusCode}">
+
+	<li>Request URI:  ${pageContext.errorData.requestURI}</li>
+    <li th:case="'400'">Status Code: 400 Bad Request</li>
+    <li th:case="'401'">Status Code: 401 Unauthorized</li>
+    <li th:case="'403'">Status Code: 403 Forbidden</li>
+    <li th:case="'404'">Status Code: 404 Not Found</li>
+    <li th:case="'406'">Status Code: 406 Not Acceptable</li>
+    <li th:case="'408'">Status Code: 408 Request Timeout</li>
+    <li th:case="'500'">Status Code: 500 Internal Server Error</li>
+    <li th:case="'503'">Status Code: 503 Service Unavailable</li>
+    <li th:case="*">Status Code:  ${pageContext.errorData.statusCode}</li>
+</ul>
+    
+			
+<script>    
+  function showDetail() {
+    document.getElementById('detail').style.display='block';
+    document.getElementById('expand').style.display='none';
+    document.getElementById('collapse').style.display='block';
+  }
+  function hideDetail() {
+    document.getElementById('detail').style.display='none';
+    document.getElementById('collapse').style.display='none';
+    document.getElementById('expand').style.display='block';
+  }
+</script>    
+
+<div th:if="${pageContext.errorData.throwable} != null">
+      <!-- 
+      <ul>
+           <li>Message:  ${pageContext.errorData.throwable.message}</li>
+      </ul>
+       -->
+      <input id="expand"   type="button" value="Show Exception" 
+             alt="Click here to see the error detail." onclick="showDetail()" />
+      <input id="collapse" type="button" value="Hide Exception" 
+             style="display: none;" 
+             alt="Click here to hide the error detail." onclick="hideDetail()" />
+
+<!-- nao formatar as tags abaixo devido � tag <pre></pre> --> 
+<pre id="detail" style="display: none;">
+${pageContext.errorData.throwable}
+</pre>
+<pre th:each="st : ${pageContext.errorData.throwable.stackTrace}">
+   ${st}
+</pre>  
+</div>
+   	
+
+<div th:if="${pageContext.exception} != null">   
+   <!-- 
+   <ul>
+        <li>Message:  ${pageContext.exception.message}</li>
+   </ul>
+    -->
+   <input id="expand"   type="button" value="Show Exception" 
+          alt="Click here to see the error detail." onclick="showDetail()" />
+   <input id="collapse" type="button" value="Hide Exception" 
+          style="display: none;" 
+          alt="Click here to hide the error detail." onclick="hideDetail()" />
+    
+<pre id="detail" style="display: none;">
+${pageContext.exception} 
+</pre>
+<pre th:each="st : ${pageContext.exception.stackTrace}">
+   ${st}
+</pre>  
+</div>
+
+</body>
+</html>

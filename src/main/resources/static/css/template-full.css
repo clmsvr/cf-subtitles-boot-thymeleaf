@@ -1,0 +1,932 @@
+/****************************************
+ Especifico da Aplicacao 
+ ****************************************/
+
+/*indicador para ajax*/
+.ui-autocomplete-loading {
+  background: white url('../image/ui-anim_basic_16x16.gif') right center no-repeat;
+}
+.errorMessage {
+    color: #c00;
+}
+/* personalização do Fildset para o bootstrap */
+.form-horizontal > fieldset > legend {
+    font: verdana, sans-serif;
+    font-weight:bold;
+    font-size:1.2em;       
+}
+.f-bs-static{
+    padding-left: 15px;
+}
+.f-bs-static > span{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: blue;
+    font-size: 12px;
+    font-weight: bold;
+    vertical-align:baseline; /*!!*/ 
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* fim testes */
+
+
+/****************************************
+ Personalização do Boostrap 
+ ****************************************/
+
+a img {border:none;}
+a:focus, a:hover {color:#09f;}
+a {color:#06c;text-decoration:underline;font-size: 12px;}
+
+.hide-docs{
+    display:none;
+}
+.hide-selected{
+    
+}
+
+/**************************************************
+    Estrutura da Aplicação
+***************************************************/
+
+/* Sticky Footer */
+html {
+  position: relative;
+  min-height: 100%;  
+}
+body {
+  margin-bottom: 25px; /* Margin bottom by footer height */
+}
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 25px; /* Set the fixed height of the footer here */
+  
+  /*opcional*/
+  text-align: center;
+  vertical-align: middle;
+  border-top: #EBEBEB 1px solid;
+  color: #666666;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 10px;  
+}
+
+/***** LEMBRETE *********
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+*************************/
+
+
+/**********  Header Modelo 1 ************** 
+Header inclui:  Logo , formulario de pesquisa , links o menu
+Estrutura:
+		<header class="header-border">
+		   <div class="header-logo" >
+		        <img src="${pageContext.request.contextPath}/image/vvtv.png" alt="" >
+		   </div>  
+		      
+		   <div class="header-form-container" >
+		   
+		        <div class="header-links" >  (ou  ## MENU ##)
+		            ... 
+		        </div>
+		        
+		        <form>
+                    ...
+		        </form> 
+		   </div>   
+		   <div class="header-close"> </div>
+		</header>
+**********************************************/
+.header-border {
+    border-bottom: 1px solid #EBEBEB; 
+    margin-bottom: 7px;
+}
+.header-close{
+	clear:both;
+}
+.header-logo{
+	float: left;
+    height: 100px; /*84px;*/
+    width: 150px;
+    margin: 0;
+    padding: 0;     
+}
+.header-links{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.header-links a{
+    margin-right: 25px;
+    font-weight: normal;
+    text-decoration: none;
+    cursor: pointer;
+    color: #3B4F64;
+    font: serif;
+    font-size: small;
+}
+.header-links a:hover {
+    color: #3B4F64;
+    text-decoration: underline;
+}   
+.header-form-container{
+    padding: 0;
+    display: inline-block; 
+}
+@media (min-width: 992px) {  /*sugeito aos redimensionamentos do container*/
+    .header-form-container{
+        padding: 0 0 0 100px;
+    }
+}
+
+/**********  Header Modelo 2 ************** 
+Header com fundo, logo, appname, version, username, data.
+Estrutura:
+   <header class="f-title-header">
+       <div class="f-title-topbar" ></div>
+       <div class="f-title-wrap" >
+                <div class="f-title-user hidden-xs"> 
+                    <b class="glyphicon glyphicon-user"></b>
+                    <span>Admin</span>
+                    <span class="f-title-data">01 Janeiro 2014</span>   
+                </div>
+                <div class="f-title-logo" >
+                    <div class="f-title-appname">
+                       <span>Aplication ID <b>Name</b></span>
+                       <span class="f-title-version hidden-xs">1.0.0 </span>    
+                    </div>
+                </div>          
+       </div>
+       #####  MENU  #####
+   </header>   
+**********************************************/
+.f-title-wrap {
+    font-family:  verdana; 
+}
+.f-title-header {
+    border-bottom: 1px solid #EBEBEB; 
+}
+.f-title-topbar{
+    color: #ffffff;
+    height: 5px
+}
+.f-title-wrap{
+    height: 40px; 
+    background: url(../image/title_bgr_40.jpg) top left repeat-x;
+    border-bottom: 1px solid #EBEBEB;  
+}
+.f-title-logo{
+    height: 39px; /*84px*/
+    padding-left: 50px; /*100px*/
+    background: url(../image/title_logo_40.jpg) top left no-repeat;
+}
+.f-title-appname {
+    font-size:22px;   
+    color: #296709; 
+    padding: 5px 0 0 0px; /*22px*/
+}
+.f-title-version {
+    font-size:12px; 
+    font-weight:bold;
+    color: #296709; 
+}
+.f-title-user {
+    float: right;
+    font-size:12px; 
+    font-weight:bold;
+    color: #296709; 
+    padding: 5px 10px 0 0;
+}
+.f-title-data {
+    font: verdana, sans-serif;
+    font-size:12px; 
+    font-weight:normal;
+    color: #296709; 
+    padding-left: 10px;
+}
+@media (min-width: 992px) {
+    .f-title-wrap{
+        height: 84px; 
+        background: url(../image/title_bgr_84.jpg) top left repeat-x;
+    } 
+    .f-title-logo{
+        height: 82px; /*39px*/
+        padding-left: 100px; /*50px*/
+        background: url(../image/title_logo_84.jpg) top left no-repeat;
+    }
+    .f-title-appname {
+        font-size:22px;   
+        color: #296709; 
+        padding: 22px 0 0 0px; /*5px*/
+    }  
+}
+/* fim menu 2 */
+
+
+/*****************************************************
+Menu Personalizado Responsivo
+******************************************************/
+/*Navbar - tamanho*/
+.navbar {
+    min-height:30px !important;
+    margin-bottom: 0;
+    font-family: "Trebuchet MS", Arial, san-serif;
+}
+/*Navbar - borda*/
+.nav, .navbar-nav, .navbar-default, .navbar{
+    border: none; /*1px solid black;*/
+    box-shadow: none;
+}
+/*Navbar - recuo do menu p/ esqueda*/
+.collapse {
+    padding-left: 0;
+}
+/*Navbar - estilo */
+.navbar-default{
+  background-image: none;
+  background-color: #ffffff;
+}
+.navbar-nav > li > a {
+    padding-top:5px !important; 
+    padding-bottom:5px !important;
+    text-decoration: none;
+}
+.navbar-default .navbar-nav > li > a{
+  font-weight: bold;
+  font-size:11px;
+  color:#286EA0 ;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    background-color: #F5F5F5;
+    color:#043454;
+}
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #043454;
+    background-color: #F5F5F5;
+}
+.dropdown-menu > li > a {
+  color:#286EA0 ; 
+  font-weight: bold;
+  font-size:11px;
+  text-decoration: none;
+}
+@media (min-width: 768px) { /*somente a partir desta resolução o  menu EXTENDIDO é exibido */
+    /*abrir drop down menu "on hover" */
+    ul.nav li.dropdown:hover > ul.dropdown-menu {
+        display: block;    
+    }  
+}
+
+/* ============================================= */ 
+/*                                               */
+/*        MENU HORIZONTAL CSS                    */
+/*                                               */
+/* ============================================= */
+
+.menu-block-wrap{
+    border-bottom: 0.1em solid #EBEBEB;
+    display:block !important;
+}
+/*Definir a fonte do Menu*/
+ul.f-menu-horizontal{
+    font-family: verdana;
+    font-size:12px;
+    font-weight:bold;
+}
+ul.f-menu-horizontal {
+   height:30px;
+   margin: 0;
+   padding:0;
+   list-style: none;
+   display:inline-block;
+}
+/* dropdown de Primeiro nivel*/
+ul.f-menu-horizontal li {
+    height: 30px;
+    float:left; 
+    position:relative;  
+    padding-left:12px; 
+    list-style: none; 
+    z-index: 99;
+}
+/* items do menu principal */
+ul.f-menu-horizontal li a, ul.f-menu-horizontal li span {
+    line-height:30px; 
+    display:block;
+    text-decoration:none;
+    text-align:center;
+    border-bottom: 0;
+    overflow:hidden;
+    padding-left: 1px;
+    padding-right:12px;
+}
+ul.f-menu-horizontal li:hover a{
+    color:#043454;
+}
+
+/* Menu Dropdown de primeiro nivel */
+ul.f-menu-horizontal li ul {
+    display: none; 
+}
+ul.f-menu-horizontal li:hover ul{
+    width:155px; 
+    display:block; 
+    position:absolute; 
+    top:29px; 
+    left:0; 
+    margin: 0; 
+    padding:4px 0 0 0; 
+    background-color: #fff; 
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    background-clip: padding-box;    
+}
+ul.f-menu-horizontal li ul li {
+    width:153px;
+    float:left; 
+    position:relative; 
+    padding:0; 
+    margin:0;
+    border: none; 
+    height: 22px;
+    /*background: url("../image/dot.gif") repeat-x bottom;*/
+}
+ul.f-menu-horizontal li ul li.divider, .divider {
+  width:153px;
+  height: 1px !important;
+  margin: 0px 0px 5px 0 !important;
+  overflow:hiden;
+  background-color: #e5e5e5;
+  padding: 0 !important;
+}
+ul.f-menu-horizontal li:hover ul li a{
+    /*font-weight: normal;*/
+    font-size: 11px;
+    display:block;
+    color:#286EA0;
+    line-height: 20px;
+    width: 144px;
+    text-align: left;
+    margin: 0;
+    padding: 0 0 0 18px;
+}
+ul.f-menu-horizontal li:hover ul li a:hover{
+    color:#fff; 
+}
+ul.f-menu-horizontal li:hover ul li:hover{
+    background-color: #40799F;
+}
+/* dropdown de Segundo nivel*/
+ul.f-menu-horizontal li ul li ul {display: none;}
+ul.f-menu-horizontal li:hover ul li ul{display: none;}  /* dropdown de Segundo nivel*/
+ul.f-menu-horizontal li:hover ul li:hover ul{
+    display:block; 
+    position:absolute; 
+    left:150px; 
+    top:0;
+}
+
+/*************************
+Breadcrumb
+***************************/
+/* Breadcrumb Trail */
+.f-breadcrumb {
+    font-family: Helvetica;
+}
+.f-breadcrumb {
+   height:40px; 
+   margin: 0; 
+   padding: 5px 0 0 0 ;
+   border-bottom: 1px solid #EBEBEB;
+}
+.f-breadcrumb li {
+    display:inline;  
+    list-style: none;
+}
+.f-breadcrumb li a {
+    font-size:10px;
+    color: #666666;
+    text-decoration: none;
+}
+.f-breadcrumb li a:HOVER {
+    text-decoration: underline;
+}
+.f-breadcrumb .f-breadcrumb-last a {
+    font-size:18px;
+    font-weight: bold;
+}
+
+/**************************************************
+  FORMs 
+ **************************************************/
+.f-form {
+    font-size: 12px;
+}
+.f-form legend{
+    font-size:16px; 
+}
+.f-form .red-text { color: #DA3838; font-weight: bold; }
+.f-form .green-text { color: #008000; font-weight: bold;  }
+.f-form .blue-text { color: #0000FF; font-weight: bold; }
+
+.f-form .f-checkbox{
+    display: inline-block; 
+    width: 128px; 
+    margin-right: 10px; 
+}
+.f-form .f-checkbox  label{
+    display: inline-block; 
+    width: 110px; 
+    text-align: left;
+}
+.f-form .f-checkbox  input{
+    margin: 0px;
+    padding: 0px;
+}
+
+.f-form  .labelUp.input05  label input{
+    width: 65px;
+}
+.f-form  .labelUp.input2  label {
+    width: 280px;
+}
+.f-form .labelUp {
+    display: inline-block;
+    margin: 0px 15px 0px 0px;
+}
+.f-form .labelUp label{
+    display:inline-block; 
+    width: 130px; 
+    vertical-align: middle;
+}
+.f-form .labelUp label input{
+    display:block; 
+    font-weight: normal; 
+    width:100%;
+    margin: 0px;
+}
+
+.f-form  .labelBefore{
+    width: 255px;
+}
+.f-form  .labelBefore.input05{
+    width: 190px;
+}
+.f-form  .labelBefore.input05  input{
+    width: 65px ;
+}
+.f-form  .labelBefore.input2{
+    width: 395px;
+}
+.f-form  .labelBefore.input2  input , .f-form  .labelBefore.input2  textarea {
+    width: 270px;
+}
+.f-form  .labelBefore.input4{
+    width: 800px;
+}
+.f-form  .labelBefore.input4  input , .f-form  .labelBefore.input4  textarea {
+    width: 675px;
+}
+.f-form .labelBefore {
+    display: inline-block;
+    margin: 0px 15px 0px 0px;
+}
+.f-form .labelBefore label{
+    display: inline-block; 
+    width: 110px; 
+    text-align: right;
+    margin-right: 10px;
+}
+.f-form .labelBefore input, .f-form .labelBefore textarea{
+    display:inline-block; 
+    font-weight: normal; 
+    width:130px;
+    margin: 0px;
+   
+}
+@media (max-width: 768px) { 
+    .f-form .labelUp
+    {
+        width:100%;
+        display: block;
+    }
+    .f-form .labelUp label, .f-form .labelUp label input {
+        width:100% !important;
+    }
+    .f-form .labelBefore
+    {
+        width:100% !important;
+        display: block;
+    }
+    .f-form .labelBefore label, .f-form .labelBefore input, .f-form .labelBefore textarea{
+        width:100% !important;
+        text-align: left;
+    }
+}
+.f-form * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;   
+}
+.f-form  a {
+    vertical-align: bottom;
+    text-decoration: none;
+}
+.f-form a input[type=text] {
+    border-bottom: #0066CC 2px solid;
+    text-decoration: none;
+}
+.f-form span{
+    vertical-align: middle;
+}
+.f-form legend {
+    font-weight:bold;
+    border:0;
+    margin: 0;
+    padding: 0 3px 0 3px;
+    width: auto;    
+}
+.f-form fieldset {
+    /*padding:1.4em 1.4em 1.4em 1.4em;*/
+    padding: 15px;
+    margin:0;
+    margin-bottom:10px;
+    border:1px solid #ccc;
+}
+.f-form p{
+    margin-bottom: 10px;;
+}
+.f-form label {
+    color: #666666;
+    font-weight: bold;
+}
+.f-form select, 
+.f-form textarea,
+.f-form input{
+    background-color: #FFFFFF;
+    color: #666666;
+    vertical-align: middle;
+    border: #D6D6D6 1px solid;
+    border-radius: 3px;
+}
+.f-form input, .f-form textarea{
+     padding-left: 5px;
+}
+.f-form input {
+  height: 25px;
+}
+.f-form input[readonly=readonly] {
+    background-color: #EBEBEB;
+}
+.f-form select:focus,
+.f-form textarea:focus, 
+.f-form input:focus { /*efeito da borda copiado do bootstrap*/
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);    
+}
+.f-form input[type=submit], 
+.f-form input[type=button] , 
+.f-form input[type=reset]  {
+    /*
+    color: #333333;
+    font-weight: bold;
+    background: url(../image/buttom_bg.gif) bottom repeat-x;
+    */
+    color: #fff;
+    background-color: #3276b1;
+    border-color: #285e8e;
+    height: 30px;
+}
+.f-form input[type=submit]:hover, 
+.f-form input[type=button]:hover , 
+.f-form input[type=reset]:hover  {
+    background-color: #2b50a8;
+}
+.f-form .offset{
+    display: inline-block;
+    width: 120px;
+    margin: 0;
+    padding: 0;
+}
+
+/*JQuery UI*/
+/*controlar tamanho do datepitcher*/
+div.ui-datepicker{font-size:11px;}
+div.ui-datepicker thead th {background:#c3d9ff;}
+
+
+
+
+/********************************************
+  TABELAS
+*********************************************/    
+
+/*Bootstrap - personalização do header */
+.table {
+    font-family: Verdana;
+    color: #666666;
+    font-size: 12px;    
+}
+.table th {
+    font-weight:bold; 
+    background-color: #A1CCDD;
+    text-align: center;
+}
+/* fim customização bootstrap */
+
+
+/* Tabela simples Zebrada */  
+.tbzebra {
+    font-family: Verdana;
+}  
+.tbzebra tbody tr:nth-child(even) , .tbzebra tbody tr.even  {background:#e5ecf9;}
+.tbzebra th {font-weight:bold; background-color: #A1CCDD; border: 1px solid #C0C0C0;}
+.tbzebra td {border: 1px solid #C0C0C0;}
+.tbzebra thead th {background:#c3d9ff;}
+.tbzebra th, td {padding:4px 10px 4px 5px;}
+.tbzebra {
+    border-collapse: collapse;
+    color: #666666;
+    font-size: 12px;    
+    margin-bottom:1.4em;
+    width:100%;
+}
+/* Tabela Simples NÃO zebrada*/   
+.tbsimple {
+    font-family: Verdana;
+}   
+.tbsimple th {background-color: #A1CCDD; border: 1px solid #C0C0C0;}
+.tbsimple td {border: 1px solid #C0C0C0; padding:0px 2px 0px 2px;}
+.tbsimple thead th {background:#c3d9ff;}
+.tbsimple th, td {padding:4px 10px 4px 5px;}
+.tbsimple .bloq {background-color: #AECBFF;}
+.tbsimple .debito {color: #A94D3F; font: bolder; background-color: #FED8DF;}
+.tbsimple .credito {}
+.tbsimple .saldo {background-color: #D6F3DA;}
+.tbsimple .verde {color: #006600;  background-color: #0EF59E;}
+.tbsimple .amarelo {color: #886D04;  background-color: #FFFF9F;}
+.tbsimple .laranja {color: #8A4500;  background-color: #FFBA75;}
+.tbsimple .vermelho {color: #A94D3F; background-color: #FED8DF;}
+.tbsimple {
+    border-collapse: collapse;
+    color: #666666;
+    font-size: 12px;    
+    margin-bottom:1.4em;
+    width:100%;
+}
+
+/********** fim TABELAS *****************/
+
+
+
+/**************************************************
+Funcionalidades da Aplicação
+***************************************************/
+
+/* classe para destaque das palavras nas buscas */
+.highlight{
+    color: #ff0000;
+}
+
+
+/* Doc list - search results */
+#docs{
+	list-style-type: none;
+	padding: 0;
+	margin-top: 20px;
+}
+#docs a {
+    color: #3287bd;
+    display: inline-block;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+#docs li {
+    margin-bottom: 10px;
+    overflow: auto;
+    padding: 5px;
+    cursor: default;  
+}
+#docs li:hover {
+  /*background: #eee;*/
+}
+#docs li .doctitle {
+    color: #3B4F64;
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0 0 6px;
+    font-weight: lighter;
+    padding: 0;
+}
+#docs li a {
+    color: #3B4F64;
+}
+#docs li a:hover {
+	color: #0000ff;
+	text-decoration: underline;
+}
+#docs li .docimage{
+    display: inline-block;
+    margin-right: 10px;
+    pading: 0px;
+} 
+#docs li .doctext{
+    display:inline-block;
+    width: 75%;
+    vertical-align: middle;
+} 
+#docs li img {
+    width:60px;
+    height: 40px;
+}
+@media (min-width: 600px) {
+	#docs li img {
+	    width:120px;
+	    height: 80px;
+	}
+}
+#docs li p {
+    color: #444;
+    text-align: left;
+}
+/* fim Doc list */
+
+
+/* Input  */
+.my-btn-info{ /*customizacao da classe 'btn-info' do Bootstrap para o botao search*/
+    background-color: #3B4F64;
+    border-color: #172637
+}
+.my-btn-info:hover{ /*customizacao da classe 'btn-info' do Bootstrap para o botao search*/
+    background-color: #286EA0;
+}
+.my-btn-info:focus{ /*customizacao da classe 'btn-info' do Bootstrap para o botao search*/
+  color: #fff;
+}
+.inputSubmit{
+    display: inline-block;
+    margin-left: 15px;
+}
+.inputSubmitText{
+    display: inline-block;
+    width: 230px;
+}
+.inputSubmitButton{
+    display: inline-block;
+    width: 40px;
+    height: 32px;
+}
+.checkTypeContainer{
+    display: block;
+    margin-left: 10px;
+    font-size: 12px;
+    line-height: 1.5;  
+}
+@media (min-width: 992px) { 
+    .checkTypeContainer{
+        display: inline-block;
+    }
+} 
+.checkTypeList{
+    display: inline-block;
+    margin-left: 10px;
+    color: #3B4F64;
+}
+@media (min-width: 670px) { 
+	.inputSubmitText{
+	    width: 300px;
+	}
+	.inputSubmitButton{
+	    width: 45px;
+	    height: 32px;
+	}
+} 
+/* fim input */
+
+
+/* Spell Check */
+#spellcheck p a{
+	cursor: pointer; 
+	text-decoration: none;
+	font-size: inherit;
+}
+/* fim Spell Check */
+
+
+
+/* Pager (Paginador)  */
+#pager, #pager2 {
+  padding-left: 0px;
+}
+#pager a, #pager2 a  {
+    color: #3287bd;
+    font-weight: 700;
+    text-decoration: none;
+    margin-right: 9px;
+}
+#pager a:hover, #pager2 a:hover {
+    text-decoration: underline;
+}
+.pager-current{
+	color: #000000;
+    font-weight: 700;
+    font-size: large;
+    margin-right: 9px;
+}
+.pager-next, .pager-prev{
+	font-size: large;
+}
+#pager,#pager-header,#pager2,#pager-header2 {
+  display: inline;
+}
+#pager li, #pager2 li, .links li {
+  list-style-type: none;
+  display: inline;
+}
+/* fim Pager */
+
+
+
+/* Timeline e Player  */  
+#timeline-container{ display:block; width:100%; height:30px; }
+#timeline{border-bottom: solid 3px; }
+#timeline-ctrl{height:80px; margin-top: 10px; float:left; display: none;}
+#timeline-tip {  }
+
+#player{   /* player do video highlight*/
+    width: 100%;
+    height: 270px;
+}
+
+@media (min-width: 768px) {
+    #player{
+        width: 100%;  
+        height: 270px;
+    }
+    #timeline-container{ display:block; width:100%; height:30px; }
+}
+@media (min-width: 992px) {  /*Large: 853 px por 480 px*/
+    #player{
+        width: 648px; /*multiplo de 18*/ 
+        height: 360px;
+    }
+    #timeline-container{ display:block; width:640px; height:30px; }
+}
+@media (min-width: 1200px) {  /*hd720  1.280 px por 720 px */
+    #player{
+        width: 648px; /*multiplo de 18*/
+        height: 360px;
+    }
+    #timeline-container{ display:block; width:640px; height:30px; }
+}   
+/* fim  Timeline e Player  */ 
+
+
+
+/* Seleções */
+.iframe_sel{ /* iframe dos videos selecionados*/
+	display: inline-block;
+	width: 305px;
+	height: 210px;
+	padding: 5px 5px 0px 0px;
+}
+@media (min-width: 900px) {
+    .iframe_sel {
+        display: inline-block;
+        width: 400px;
+        height: 280px;
+        padding: 5px 10px 0px 0px;
+    }
+}
+/* fim seleções */
+
+    

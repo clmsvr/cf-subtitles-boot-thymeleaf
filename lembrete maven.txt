@@ -1,0 +1,68 @@
+Passos para criar o projeto:
+- criar um projeto Maven com Archetype:  maven-archetype-webapp
+- trocar o JRE5 para JDK7
+- adicionar "Web App Libraries" para o build path
+- laterar a versão do java para java 1.7 nas propriedades do projeto:
+	- Java Compliter
+	- Project Facets
+ATENCAO: Não deixar(dar OK) o eclipse alterar as configurações do projeto ao se 
+alterar as propriedades. Vai mudar a natureza do projeto.
+
+
+- Alterar Web XML para Servlet 3.0 e Spring MVC:
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+      version="3.0"> 
+ 
+	<servlet>
+		<servlet-name>context</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>context</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<filter>
+		<filter-name>hiddenHttpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter
+		</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>hiddenHttpMethodFilter</filter-name>
+		<servlet-name>context</servlet-name>
+	</filter-mapping>
+
+</web-app>
+
+
+- Incluir dependencias no pom.xml:
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>4.0.3.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		
+		
+=========================================================================================
+
+
+ 

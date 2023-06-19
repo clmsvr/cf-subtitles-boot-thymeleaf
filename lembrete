@@ -1,0 +1,27 @@
+Layout no modelo novo.
+
+Apache Ivy
+- bibliotecas baixadas pelo ivy tem muitos comflitos com tomcat 8 devido às dependencias baixadas pelo log4j.
+- usar assim: <dependency org="log4j"            name="log4j" rev="1.2.17"  conf="*->default" />  <!-- conf="*->default" importante para não gerar conflito. -->
+
+this.Manager.response.response
+this.Manager.response.response.docs
+
+
+### YOUTUBE
+canal: CF.subtitles
+email: cfsubtitles@gmail.com
+
+### Novo video
+Upload do video no YouTube (publico)
+Download da legenda no formato .SBV  (pode ser SRT também)
+Usar o programa SbvDeploy.java para carregar a legenda.
+
+No fim usar o programa PrintSrt.java para gerar os arquivos .SRT para upload no YouTube. 
+
+
+Encodes:
+Para carregar texto no banco de dados, primeiro converta o texto para UTF-8
+no Notepad++. 
+O banco espera o texto nesse formato.
+

@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="pt-br">
+
+
+<head>
+
+	<!-- =========== TITLE =========== -->
+    <title> Caio Fabio - Seleções </title>
+    <!-- ==================================== -->  
+
+	<meta th:include="~{fragments-search :: head}"  th:remove="tag" ></meta>
+	    
+</head>
+      
+<body>
+
+<div class="container">
+
+
+   <!-- =========== BODY =========== -->        
+
+<div class=hide-docs>
+   <ul id="pager"></ul>
+   <div id="pager-header"></div>
+   
+   <ul id="docs"></ul>
+   
+   <ul id="pager2"></ul>
+   <div id="pager-header2"></div> 
+</div>   
+
+
+
+<center class="hide-selected" >
+   <iframe class="iframe_sel"
+      src="https://player.vimeo.com/video/72784212?color=ffffff&byline=0&portrait=0"
+      width="400" height="280" frameborder="0" webkitallowfullscreen
+      mozallowfullscreen allowfullscreen></iframe>
+
+   <!-- iframe class="iframe_sel"
+      src="https://player.vimeo.com/video/56810547?color=ffffff&byline=0&portrait=0"
+      width="400" height="280" frameborder="0" webkitallowfullscreen
+      mozallowfullscreen allowfullscreen></iframe>  -->
+
+   <iframe class="iframe_sel" 
+      src="https://www.youtube.com/embed/Wd0iYodvXgM" frameborder="0"
+      allowfullscreen></iframe>
+
+   <iframe class="iframe_sel"
+      src="https://player.vimeo.com/video/53865824?color=ffffff&byline=0&portrait=0"
+      width="400" height="280" frameborder="0" webkitallowfullscreen
+      mozallowfullscreen allowfullscreen></iframe>
+
+   <iframe class="iframe_sel"
+      src="https://player.vimeo.com/video/72864694?color=ffffff&byline=0&portrait=0"
+      width="400" height="280" frameborder="0" webkitallowfullscreen
+      mozallowfullscreen allowfullscreen></iframe>
+
+   <iframe class="iframe_sel"
+      src="https://player.vimeo.com/video/2001704?color=ffffff&byline=0&portrait=0"
+      width="400" height="280" frameborder="0" webkitallowfullscreen
+      mozallowfullscreen allowfullscreen></iframe>
+
+</center>
+
+   <!-- ========= FIM BODY ========= -->  
+
+</div> <!-- end main container -->
+
+<div th:replace="~{fragments-search :: footer}"></div>
+
+</body>
+</html>

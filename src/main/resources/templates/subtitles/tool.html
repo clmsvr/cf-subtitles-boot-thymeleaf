@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="pt-br">
+    
+<head>
+
+    <!-- =========== TITLE =========== -->
+    <title> Legendas - Participação </title>
+    <!-- ==================================== -->  
+    
+    <meta charset="ISO-8859-1">
+
+    <!-- sem cache no browser para as paginas da app  -->
+    <meta http-equiv="Pragma"        content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Expires"       content="0">
+    <meta name="author"              content="Claudio M. Silveira">
+    <meta name="keywords"            content="Evangelho de Jesus; Caio Fabio">
+    
+<!-- evitar as chamadas extras quando nao ha favicon
+   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+ -->   
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABQ0lEQVQ4T63TvUoDQRAH8Jm50iKkVQt9Aitb0Vqw9iEyu+AHWghekECwkNu7K4W0YmVjIT5AOpG8gI3YmIuFlZDNXxauSA4TSOK2M/ObYZhlWvLxkvX0/0CWZave+5aIHIxGo5qI9ABcW2vv/pp2YoJQDKDLzPcAHBF9isiO9z4XkY6qtqvIBJAkSSeKor6qno4nllP1oijaVtW38dgEkKZpQURbxpj3aifn3C0zvxpj8qlAkiRDEVkxxvxUgTRN2wC+rbWtWRO8iMhZo9F4Hk8CwHmedwFcGWMepwLOuUMiaorInqp+hMSyOOzEFEWxEcfxcCoQAlmWnXvvT5j5gZn7zLxLROsA1gA0rbXxTKBENgHsA6iFxQ0Gg6d6vX7BzJdVZK5LdM7FJXJsrb0JzeYCQoFz7khEvlS1sxAw8xIX+Zm/m9eUEe4RhNoAAAAASUVORK5CYII=">
+    
+    <!-- ### CSS ### -->
+    <!-- Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" media="screen">
+    <!-- app --> 
+    <link  rel="stylesheet"  th:href="@{/fonts/roboto-local.css}" />
+    <link  rel="stylesheet"  th:href="@{/css/subtitles-tool.css}" />
+    <link  rel="stylesheet"  th:href="@{/jquery/css/smoothness/jquery-ui-1.10.4.custom.full.css}" />
+    
+	<!-- ### JAVASCRIPT de inicializacao ### -->
+	<script th:src="@{/jquery/jquery-2.1.1.min.js}" ></script>
+    <script th:src="@{/jquery/jquery-ui-1.10.4.custom.full.js}"></script>
+    <!-- app -->  
+    <script th:src="@{/js/subtitleTool.js}"></script>
+</head>
+<body>
+
+<div class="container-fix">
+
+   <header class="f-title-header">
+   
+      <div class="f-title-topbar" ></div>
+       
+      <a th:href="@{/s/legendas}"><div class="f-title-wrap" > </div></a>    
+             
+   </header>
+}
+   <script type="text/javascript"   th:inline="javascript" >
+       //Dados dos Matches
+       contextPath = [["@{}"]];
+       videoid = [['${videoid}']];
+       blockid = [['${blockid}']];
+       //array com os tempos de inicio de cada legenda
+       subtitlesBegin = /*[[${subtitlesBegin}]]*/ 0; 
+       //array com os tempos de fim de cada legenda
+       subtitlesEnd = /*[[${subtitlesEnd}]]*/ 0;  
+       startTime = /*[[${startTime}]]*/ 0;
+       maxtime = /*[[${maxAllocationTime}]]*/ 0;
+   </script>
+   
+   
+   <div class="tool-container">
+   
+      <h1>${videoTitle}</h1>
+      
+      <div id="player"></div> <!-- The <iframe> (and video player) will replace this <div> tag. -->
+   
+      <div id="player-captions-window">
+            <span id="player-captions-text"></span>
+      </div>
+      
+      <div th:if="${maxAllocationTime < 0}" th:remove="tag" >
+         <form class="tool-form" id="tool-form"  th:action="@{/s/legendas/worker/tool-finalize}"  method="post" >
+            <input type="hidden" name="blockid"  value="${blockid}">
+            <input type="hidden" name="subtitle" value="">
+            <input type="button" name="finalize" value="Atualizar" th:onclick="finalizeBlock('tool-form', [[${startTime}]] )">
+         </form>
+      </div>
+      <div th:unless="${maxAllocationTime < 0}" th:remove="tag" >
+         <span class="subtitile-warning">Você ainda tem <span id="subtitile-warning-time">00:00</span> minutos para finalizar as legendas de <span id="subtitile-begin">?</span> a <span id="subtitile-end">?</span> </span>
+         <form class="tool-form" id="tool-form" action="@{/s/legendas/worker/tool-finalize}"  method="post" >
+            <input type="hidden" name="blockid"  value="${blockid}">
+            <input type="submit" name="quit"     value="Desistir">
+            <input type="hidden" name="subtitle" value="">
+            <input type="button" name="finalize" value="Trabalho Finalizado!" th:onclick="finalizeBlock('tool-form', [[${startTime}]] )">
+         </form>
+         <div id="dialog" title="Finalização">
+           <p>Para finalizar o trabalho é preciso um tempo mínimo de 4 minutos.</p>
+         </div>      
+      </div>             
+   
+      <div id="subtitle" >
+           <p th:if="${locale == 'PT' }" >Legendas em Protuguês</p>
+           <p th:unless="${locale == 'PT' }" class="subtitle-top">English Subtitling</p> <a class="subtitle-top-link" target="_blank" th:href="@{/s/legendas/worker/pt-block?blockid=${blockid}}" >PT block</a>
+         <br>
+         
+         <div th:each="c,vs : ${subtitles}"  th:remove="tag" >
+         
+            <div id="subtitle${vs.index}" class="subtitle-line" th:onclick="subtitleClick('[[${vs.index}]]')">
+               <div class="subtitle-time" th:ondblclick="subtitleDblClickTime('[[${vs.index}]]', this)" >
+                  <span>${c.strBegin}</span> 
+                  <span>${c.strEnd}</span>
+                  <span class="line-count" >${vs.count}</span>
+               </div>
+      
+               <div class="subtitle-text" lang="pt-BR" >
+                  <textarea id="text${vs.index}"  readonly maxlength="500" 
+                         th:ondblclick="subtitleDblClick('[[${vs.index}]]', this)"   
+                         th:onblur="textOnBLur('[[${vs.index}]]', this)"
+                         th:onchange="textOnChange('[[]]${vs.index}]]', this)"
+                         th:onkeyup="textOnKeyUp('[[${vs.index}]]', this)"
+                  >${c.text}</textarea>
+               </div>
+            </div>
+         </div>
+ 
+      </div>
+   </div>
+                     
+     
+</div> <!-- end main container -->
+
+<div id="footer" >
+    <span class="text-muted">Copyright &copy; Caio Fabio ${#dates.format(#dates.createNow(), 'yyyy')} </span>
+</div>   
+
+</body>
+</html>
+
+
+
+
+
+

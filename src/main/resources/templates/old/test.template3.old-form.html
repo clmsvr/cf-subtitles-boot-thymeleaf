@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>App Layout</title> 
+    <meta charset="utf-8">
+
+    <!-- sem cache no browser para as paginas da app  -->
+    <meta http-equiv="Pragma"        content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Expires"       content="0">
+
+    <link rel="icon"          href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- ### CSS ### -->
+    <!-- Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <!-- JQuery -->
+    <link rel="stylesheet" href="jquery/css/smoothness/jquery-ui-1.10.4.custom.datapicher.min.css" >
+    <!-- Footable -->
+    <link  href="footable/css/footable.core.min.css" rel="stylesheet" />
+    <!-- app --> 
+    <link  href="css/template-old-form.css" rel="stylesheet" />
+    
+	<!-- ### JAVASCRIPT de inicialização ### -->
+	<script src="jquery/jquery-2.1.1.min.js" ></script>
+	<script src="jquery/jquery-ui-1.10.4.custom.datapicher.min.js" ></script>    
+	<script src="footable/dist/footable.min.js" ></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>     
+	<script>
+	   var idioma = '';
+	   if(navigator.browserLanguage) 
+	   {  
+		   idioma = navigator.browserLanguage;    
+	   }
+	   else if(navigator.language) 
+	   {
+		   idioma = navigator.language;
+	   }
+	   if(idioma=="pt-BR") 
+	   {
+	        $.datepicker.setDefaults({
+	            dateFormat: 'dd/mm/yy',
+	            dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+	            dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+	            dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+	            monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+	            monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+	            nextText: 'Próximo',
+	            prevText: 'Anterior'
+	        });   
+	   }
+        
+        var state = 0;
+        function showme()
+        {  
+            var info = document.getElementById('cliente.info');
+            var memo = document.getElementById('memos');
+            
+            if( state == 0 ) 
+            {  
+                info.style.visibility="visible";  
+                memo.style.display="block";   
+                state = 1;
+            }
+            else
+            {  
+                info.style.visibility="hidden";
+                memo.style.display="none";  
+                state = 0;
+            }  
+        } 
+        
+        <!-- a função validaCPF,  recebe uma string e retorna true ou false.      -->
+        function validaCPF(cpf) {
+            if (cpf.length < 11) return false
+            var nonNumbers = /\D/
+            if (nonNumbers.test(cpf))return false
+            if (cpf == "00000000000" || cpf == "11111111111" ||
+                cpf == "22222222222" || cpf == "33333333333" ||
+                cpf == "44444444444" || cpf == "55555555555" ||
+                cpf == "66666666666" || cpf == "77777777777" ||
+                cpf == "88888888888" || cpf == "99999999999")
+                    return false
+            var a = []
+            var b = new Number
+            var c = 11
+            for (i=0; i<11; i++){
+                    a[i] = cpf.charAt(i)
+                    if (i < 9) b += (a[i] * --c)
+            }
+            if ((x = b % 11) < 2) { a[9] = 0 } else { a[9] = 11-x }
+            b = 0
+            c = 11
+            for (y=0; y<10; y++) b += (a[y] * c--)
+            if ((x = b % 11) < 2) { a[10] = 0 } else { a[10] = 11-x }
+            if ((cpf.charAt(9) != a[9]) || (cpf.charAt(10) != a[10]))return false
+            return true
+        }
+        function vCPF(i){
+          i.setCustomValidity(validaCPF(i.value)?'':'CPF inválido!')
+        }  
+        
+   </script> 
+
+       
+</head>
+<body>
+
+<div class="container">
+
+   <header class="f-title-header">
+   
+       <div class="f-title-topbar" ></div>
+           
+       <div class="f-title-wrap" >
+                <div class="f-title-user hidden-xs"> 
+                    <b class="glyphicon glyphicon-user"></b>
+                    <span>Admin ID</span>
+                    <span class="f-title-data">01 Janeiro 2014</span>   
+                </div>
+                                       
+                <div class="f-title-logo" >
+                     <div class="f-title-appname">
+                         <span>Aplication ID <b>Name</b></span>
+                         <span class="f-title-version hidden-xs">1.0.0 </span>    
+                     </div>
+                </div>          
+       </div>
+       
+       <div class="navbar navbar-default "> 
+        
+            <button type="button" class="navbar-toggle" data-toggle="collapse"  data-target=".navbar-collapse">
+                <span class="icon-bar"></span> 
+                <span class="icon-bar"></span> 
+                <span class="icon-bar"></span>
+            </button>       
+        
+            <div class="collapse navbar-collapse ">
+            
+                <ul class="nav navbar-nav ">
+                    <li ><a href="#">Home</a></li>
+                    <li><a href="#">ID Clientes</a></li>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" data-target="#">Ordens<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Abertas</a></li>
+                            <li><a href="#">Fechadas</a></li>
+                            <li><a href="#">Concluindo</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Nova Ordem Anônima</a></li>
+                        </ul>                       
+                    </li>
+                    <li><a href="#textModal" data-toggle="modal" data-target="#textModal">Sair</a></li>
+                </ul>
+                           
+            </div>
+       </div>
+                    
+   </header>
+   
+   
+
+   <ul class="f-breadcrumb">  
+                   <li>  <a href="/flora">Home</a></li>
+                   <li>  &nbsp; > &nbsp;</li>
+                   <li>  <a href="/flora/p1/Cliente.list.action?updBreadcrumb=2">ID Clientes</a></li>
+                   <li>  &nbsp; > &nbsp;</li>
+                   <li class="f-breadcrumb-last">  <a href="/flora/p1/Cliente.view.action?id=610&updBreadcrumb=3">Cliente</a></li>
+   </ul>
+
+
+<!-- ############# -->
+
+<ul class="nav navbar-nav ">
+  <li class="dropdown">
+      <a data-toggle="dropdown" data-target="#">Ordens<b class="caret"></b></a>
+      <ul class="dropdown-menu">
+          <li><a href="#">Abertas</a></li>
+          <li><a href="#">Fechadas</a></li>
+          <li><a href="#">Concluindo</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Nova Ordem Anônima</a></li>
+      </ul>                       
+  </li>
+</ul>
+<ul class="f-menu-horizontal">
+  <li>
+      <a href="#">Ordens<b class="caret"></b></a>
+      <ul>
+          <li><a href="#">Login</a></li>
+          <li><a href="#">Registra</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Sair</a></li>
+      </ul>                       
+  </li>
+</ul>
+
+
+<!-- 0 #################################################################################### -->
+    <form  class="f-form" action="" method="post" >
+           
+        <fieldset> <legend>Dados da ID Ordem</legend>  
+                            
+            <p> 
+               <i>
+                   <label>ID Ordem 
+                   <input readonly="readonly" type="text" name="ordem.idOrdem" value="2779"  size="10" maxlength="10" />
+                   </label>
+               </i>
+               
+               <i>
+                   <label>Cliente
+                   <a href="">  <input readonly="readonly" type="text"  value="Robson Emerik"   /></a>
+                   </label>
+               </i>
+               
+               <a href="">Alterar Cliente</a>
+            </p>
+    
+            <p>
+            <i>
+               <label>Status 
+               <input readonly="readonly" type="text" name="ordem.status" value="aberta"  size="20" maxlength="20" />
+               </label>
+            </i>
+            <b>
+               <input DISABLED type="checkbox" name="ordem.reopened" value="true"  />
+               <label>re-aberta</label> 
+               <input type="hidden" name="ordem.reopened" value="false"   />
+            </b>
+            </p>  
+            
+            <p> 
+            <i>
+               <label>Valor Total 
+               <input readonly="readonly" type="text" name="ordem.valorTotal" value="0.00"  size="10" maxlength="10" />
+               </label>
+            </i>
+            <i>
+               <label>(-5%) 
+               <input readonly="readonly" type="text" value="0.00"  size="10" maxlength="10" />
+               </label>
+            </i>
+            <i>
+               <label>(-10%) 
+               <input readonly="readonly" type="text" value="0.00"  size="10" maxlength="10" />
+               </label>
+            </i>
+            </p>
+            
+            <p>        
+            <i>
+               <label>Valor Negociado 
+               <input type="text" name="ordem.valorNegociado" value="0.00"  size="10" maxlength="10" autofocus />
+               </label>
+            </i>
+            <i>
+               <label>Troco
+               <input type="text" name="ordem.troco" value=""  size="10" maxlength="10" />
+               </label>
+            </i>
+            <i>                     
+               <label>Crédito Gerado 
+               <input type="text" name="ordem.creditoGerado" value=""  size="10" maxlength="10" />
+               </label>
+            </i>
+            <i>
+               <label>Debito Gerado 
+               <input type="text" name="ordem.debitoGerado" value=""  size="10" maxlength="10" />
+               </label>   
+            </i>
+            <b>                
+               <span class="blue-text">SALDO: OK</span>
+            </b>                                                                             
+            </p>  
+    
+            <p> 
+            <i>
+               <label>Total Cheque
+               <input readonly="readonly" type="text" name="ordem.totalCheque" value="0.00"  size="10" maxlength="10" />
+               </label>
+            </i>
+            </p>
+            
+            <p>
+            <i>
+                <label>Total Dinheiro 
+                <input type="text" name="ordem.totalDinheiro" value=""  size="10" maxlength="10" />
+                </label>
+            </i>
+            </p>
+            
+            <p>
+            <i>
+               <label>Total Cartao 
+               <input type="text" name="ordem.totalCartao" value=""  size="10" maxlength="10" />
+               </label>
+            </i>       
+            </p>  
+                    
+            <p>
+            <i>
+               <label>Crédito Usado 
+               <input type="text" name="ordem.creditoUsado" value=""  size="10" maxlength="10" />
+               </label>
+            </i>
+            <b>
+               <span class="green-text">Crédito disponível: 0.0 SALDO: OK</span>
+            </b>    
+            </p> 
+                                         
+            <p>  
+            <i>
+                <label>Data da Ordem           
+                <input type="text" readonly="readonly" id="datepicker1" name="ordem.ordemDate" value="02/06/2014" size="15" />
+                </label>
+                <script>
+                 $(function() {
+                     $( "#datepicker1" ).datepicker();
+                 });    
+             </script>
+             </i>
+             <i>
+                <label >Data de Criação 
+                <input readonly="readonly" type="text" name="ordem.sysCreationDate" value="02/06/2014 12:35:02"  size="23" maxlength="25"/>
+                </label>
+             </i>
+             <i>
+                <label >Última atualização 
+                <input readonly="readonly" type="text" name="ordem.sysUpdateDate" value="02/06/2014 12:35:02"  size="23" maxlength="25"/>
+                </label>
+             </i>
+           </p>  
+            
+            <p>  
+                <i>
+                <label>Info
+                <textarea name="ordem.info" maxlength="150" ></textarea> <!--  Em HTML5, o elemento tex-tarea também pode ter maxlength!   -->
+                </label>
+                </i>
+            </p> 
+            <p>  
+                <b>
+                <label>Info</label>
+                <textarea name="ordem.info" maxlength="150" ></textarea> <!--  Em HTML5, o elemento tex-tarea também pode ter maxlength!   -->
+                </b>
+            </p>                                                             
+        </fieldset>
+        
+        <input type="submit"   value="Salvar" />      <!-- deve vir primeiro : acao defalt do atalho Alt-S -->
+        <label> (Alt + S)</label> 
+        <input type="hidden" name="updBreadcrumb" value="12" />  
+        <input type="submit"  name="updateCommit" value="Finalizar Ordem" />
+    </form> 
+
+
+        
+<!-- 1 #################################################################################### -->
+    <form  class="f-form" action="" method="post" >
+           
+        <fieldset> <legend>Dados da Ordem</legend>  
+                            
+            <p> 
+               <b>
+                   <label>ID Ordem</label> 
+                   <input readonly="readonly" type="text" name="ordem.idOrdem" value="2779"  size="10" maxlength="10" />
+               </b>
+               
+               <b>
+                   <label>Cliente</label>
+                   <a href="">  <input readonly="readonly" type="text"  value="Robson Emerik"   />
+               </a>
+               
+               </b>
+               
+               <a href="">Alterar Cliente</a>
+            </p>
+    
+            <p>
+            <b>
+               <label>Status</label> 
+               <input readonly="readonly" type="text" name="ordem.status" value="aberta"  size="20" maxlength="20" />
+            </b>
+            <b>
+               <label>re-aberta</label> 
+               <input DISABLED type="checkbox" name="ordem.reopened" value="true"  />
+               <input type="hidden" name="ordem.reopened" value="false"   />
+            </b>
+            </p>  
+            
+            <p> 
+            <b>
+               <label>Valor Total</label> 
+               <input readonly="readonly" type="text" name="ordem.valorTotal" value="0.00"  size="10" maxlength="10" />
+            </b>
+            <b>
+               <label>(-5%)</label> 
+               <input readonly="readonly" type="text" value="0.00"  size="10" maxlength="10" />
+            </b>
+            <b>
+               <label>(-10%)</label> 
+               <input readonly="readonly" type="text" value="0.00"  size="10" maxlength="10" />
+            </b>
+            </p>
+            
+            <p>        
+            <b>
+               <label>Valor Negociado</label> 
+               <input type="text" name="ordem.valorNegociado" value="0.00"  size="10" maxlength="10" />
+            </b>
+               <label>Troco</label> 
+               <input type="text" name="ordem.troco" value=""  size="10" maxlength="10" />
+            <b>                     
+               <label>Crédito Gerado</label> 
+               <input type="text" name="ordem.creditoGerado" value=""  size="10" maxlength="10" />
+            </b>
+            <b>
+               <label>Debito Gerado</label> 
+               <input type="text" name="ordem.debitoGerado" value=""  size="10" maxlength="10" />   
+            </b>
+            <b>                
+               <span class="blue-text">SALDO: OK</span>
+            </b>                                                                             
+            </p>  
+    
+            <p> 
+               <label>Total Cheque</label> 
+               <input readonly="readonly" type="text" name="ordem.totalCheque" value="0.00"  size="10" maxlength="10" />
+            </p>
+            
+            <p>
+                <label>Total Dinheiro</label> 
+                <input type="text" name="ordem.totalDinheiro" value=""  size="10" maxlength="10" />
+            </p>
+            
+            <p>
+               <label>Total Cartao</label> 
+               <input type="text" name="ordem.totalCartao" value=""  size="10" maxlength="10" />       
+            </p>  
+                    
+            <p>
+               <label>Crédito Usado</label> 
+               <input type="text" name="ordem.creditoUsado" value=""  size="10" maxlength="10" />
+            <b>
+               <span class="green-text">Crédito disponível: 0.0 SALDO: OK</span>
+            </b>    
+            </p> 
+                                         
+            <p>  
+            <b>
+                <label>Data da Ordem</label>            
+                <input type="text" readonly="readonly" id="datepicker1" name="ordem.ordemDate" value="02/06/2014" size="15" />
+                <script>
+                 $(function() {
+                     $( "#datepicker1" ).datepicker();
+                 });    
+             </script>
+             </b>
+             <b>
+                <label >Data de Criação</label> 
+                <input readonly="readonly" type="text" name="ordem.sysCreationDate" value="02/06/2014 12:35:02"  size="23" maxlength="25"/>
+             </b>
+             <b>
+                <label >Última atualização</label> 
+                <input readonly="readonly" type="text" name="ordem.sysUpdateDate" value="02/06/2014 12:35:02"  size="23" maxlength="25"/>
+             </b>
+           </p>  
+            
+            <p>  
+                <label>Info</label> <br>
+                <b>
+                <textarea name="ordem.info" ></textarea>
+                </b>
+            </p> 
+                                                            
+        </fieldset>
+        
+        <input type="submit"   value="Salvar" />      <!-- deve vir primeiro : acao defalt do atalho Alt-S -->
+        <label> (Alt + S)</label> 
+        <input type="hidden" name="updBreadcrumb" value="12" />  
+        <input type="submit"  name="updateCommit" value="Finalizar Ordem" />
+    </form> 
+ 
+ <!-- 2 #################################################################################### -->
+ 
+     <form  class="f-form" action="" method="post" >
+           
+        <fieldset> <legend>Dados da Ordem</legend>  
+                            
+            <p> 
+                   <label>ID Ordem</label> 
+                   <input readonly="readonly" type="text" name="ordem.idOrdem" value="2779"  size="10" maxlength="10" />
+               
+                   <label>Cliente</label>
+                   <a href="">  <input readonly="readonly" type="text"  value="Robson Emerik"   />
+               </a>
+               
+               &nbsp;&nbsp;&nbsp;&nbsp; 
+               
+               <a href="">Alterar Cliente</a>
+            </p>
+    
+            <p>
+               <label>Status</label> 
+               <input readonly="readonly" type="text" name="ordem.status" value="aberta"  size="20" maxlength="20" />
+               <label>re-aberta</label> 
+               <input DISABLED type="checkbox" name="ordem.reopened" value="true"  />
+               <input type="hidden" name="ordem.reopened" value="false"   />
+            </p>  
+            
+            <p> 
+               <label>Valor Total</label> 
+               <input readonly="readonly" type="text" name="ordem.valorTotal" value="0.00"  size="10" maxlength="10" />
+               <label>(-5%)</label> 
+               <input readonly="readonly" type="text" value="0.00"  size="10" maxlength="10" />
+               <label>(-10%)</label> 
+               <input readonly="readonly" type="text" value="0.00"  size="10" maxlength="10" />
+            </p>
+            
+            <p>        
+               <label>Valor Negociado</label> 
+               <input type="text" name="ordem.valorNegociado" value="0.00"  size="10" maxlength="10" />
+               <label>Troco</label> 
+               <input type="text" name="ordem.troco" value=""  size="10" maxlength="10" />
+               <label>Crédito Gerado</label> 
+               <input type="text" name="ordem.creditoGerado" value=""  size="10" maxlength="10" />
+               <label>Debito Gerado</label> 
+               <input type="text" name="ordem.debitoGerado" value=""  size="10" maxlength="10" />   
+               <span class="blue-text">SALDO: OK</span>
+            </p>  
+    
+            <p> 
+               <label>Total Cheque</label> 
+               <input readonly="readonly" type="text" name="ordem.totalCheque" value="0.00"  size="10" maxlength="10" />
+            </p>
+            
+            <p>
+                <label>Total Dinheiro</label> 
+                <input type="text" name="ordem.totalDinheiro" value=""  size="10" maxlength="10" />
+            </p>
+            
+            <p>
+               <label>Total Cartao</label> 
+               <input type="text" name="ordem.totalCartao" value=""  size="10" maxlength="10" />       
+            </p>  
+                    
+            <p>
+               <label>Crédito Usado</label> 
+               <input type="text" name="ordem.creditoUsado" value=""  size="10" maxlength="10" />
+               <span class="green-text">Crédito disponível: 0.0 SALDO: OK</span>
+            </p> 
+                                         
+            <p>  
+                <label>Data da Ordem</label>            
+                <input type="date" name="ordem.ordemDate" value="02/06/2014" size="15" />
+                <label >Data de Criação</label> 
+                <input readonly="readonly" type="text" name="ordem.sysCreationDate" value="02/06/2014 12:35:02"  size="23" maxlength="25"/>        
+                <label >Última atualização</label> 
+                <input readonly="readonly" type="text" name="ordem.sysUpdateDate" value="02/06/2014 12:35:02"  size="23" maxlength="25"/>
+           </p>  
+            
+            <p>  
+                <label>Info</label> <br>
+                <textarea name="ordem.info" ></textarea>
+            </p> 
+                                                            
+        </fieldset>
+        
+        <input type="submit"   value="Salvar" />      <!-- deve vir primeiro : acao defalt do atalho Alt-S -->
+        <label> (Alt + S)</label> 
+        <input type="hidden" name="updBreadcrumb" value="12" />  
+        <input type="submit"  name="updateCommit" value="Finalizar Ordem" />
+    </form> 
+ 
+
+<!-- #################################################################################### -->
+
+
+
+
+    <form  class="form-horizontal " action="" method="post" >
+           
+        <fieldset>
+        <legend class="">Dados da Ordem</legend> 
+        
+        
+        <input type="hidden" name="ordem.reopened" value="false"   />
+                            
+        <div class="form-group">
+            <label class="col-sm-1 control-label input-sm" >ID Ordem</label> 
+            <div class="col-sm-4 ">
+                <input class="form-control input-sm input-large" readonly="readonly" type="text" name="ordem.idOrdem" value="2779" />
+            </div>
+        </div>                                   
+        <div class="form-group">
+            <label class="col-sm-1 control-label input-sm" >Cliente</label>
+            <div class="col-sm-4 ">
+	            <a href="">
+	             <input class="form-control input-sm" readonly="readonly" type="text"  value="Robson Emerik"   />
+	            </a>
+            </div>
+            <div class="col-sm-2 ">
+                <p class="form-control-static input-sm" > <a href="">Alterar Cliente</a></p>
+            </div>
+        </div>   
+        
+        <div class="form-group">
+            <label class="col-sm-1 control-label input-sm" >Status</label> 
+            <div class="col-sm-4 ">
+                <input class="form-control input-sm" readonly="readonly" type="text" name="ordem.status" value="aberta"  />
+            </div>
+            <div class="col-sm-2 " >
+              <label class="checkbox input-sm" >
+                  <input class="" DISABLED type="checkbox" name="ordem.reopened" value="true"  />re-aberta 
+              </label>
+            </div>            
+        </div>   
+        
+        <div class="form-group ">        
+           <label class="col-sm-1 control-label input-sm" >Valor Total</label> 
+           <div class="col-sm-4 ">
+                <input  class="form-control input-sm" readonly="readonly" type="text" name="ordem.valorTotal" value="0.00"  maxlength="10" />
+           </div>
+           <div class="col-sm-2 ">
+                <p class="form-control-static input-sm" >(-5%) 0.00 (-10%) 0.00</p>
+           </div>           
+        </div>                        
+        <div class="form-group">
+            <label class="col-sm-1 control-label input-sm" >Valor Negociado</label>
+            <div class="col-sm-1 "> 
+                <input class="form-control input-sm" type="text" name="ordem.valorNegociado" value="0.00"  maxlength="10" />
+            </div>
+            <label class="col-sm-1 control-label input-sm" >Troco</label>
+            <div class="col-sm-1 "> 
+                <input class="form-control input-sm" type="text" name="ordem.troco" value=""  maxlength="10" />
+            </div>                     
+            <label class="col-sm-1 control-label input-sm" >Crédito Gerado</label> 
+            <div class="col-sm-1 ">
+                <input class="form-control input-sm" type="text" name="ordem.creditoGerado" value=""  maxlength="10" />
+            </div>
+            <label class="col-sm-1 control-label input-sm" >Debito Gerado</label> 
+            <div class="col-sm-1 ">
+                <input class="form-control input-sm" type="text" name="ordem.debitoGerado" value=""   maxlength="10" />                   
+            </div>
+            <div class="col-sm-1 ">
+                <span class="blue-text">SALDO: OK</span>
+            </div> 
+        </div> 
+        <div class="form-group">
+            <label class="col-sm-1 control-label input-sm" >Total Cheque</label> 
+            <div class="col-sm-1 ">
+                <input class="form-control input-sm" readonly="readonly" type="text" name="ordem.totalCheque" value="0.00"  size="10" maxlength="10" />
+            </div>
+            <label class="col-sm-1 control-label input-sm" >Total Dinheiro</label> 
+            <div class="col-sm-1 ">
+                <input class="form-control input-sm" type="text" name="ordem.totalDinheiro" value=""  size="10" maxlength="10" />
+            </div>
+            <label class="col-sm-1 control-label input-sm" >Total Cartao</label> 
+            <div class="col-sm-1 ">
+                <input class="form-control input-sm" type="text" name="ordem.totalCartao" value=""  size="10" maxlength="10" />
+            </div>       
+            <label class="col-sm-1 control-label input-sm" >Crédito Usado</label> 
+            <div class="col-sm-1 ">
+                <input class="form-control input-sm" type="text" name="ordem.creditoUsado" value=""  size="10" maxlength="10" />
+            </div>
+            <div class="col-sm-2 ">
+                <span class="green-text">Crédito disponível: 0.0 SALDO: OK</span>
+            </div>    
+        </div> 
+        <div class="form-group">
+            <label class="col-sm-1 control-label input-sm" >Data da Ordem</label>            
+            <div class="col-sm-2 ">
+                <input class="form-control input-sm" type="text" readonly="readonly" id="datepicker" name="ordem.ordemDate" value="02/06/2014" size="15" />
+            </div>
+            <script>
+                 $(function() {
+                     $( "#datepicker" ).datepicker();
+                 });    
+            </script>
+            <label class="col-sm-1 control-label input-sm">Data de Criação</label> 
+            <div class="col-sm-2 ">
+                <input class="form-control input-sm" readonly="readonly" type="text" name="ordem.sysCreationDate" value="02/06/2014 12:35:02"  size="25" maxlength="25"/>
+            </div>        
+            <label class="col-sm-1 control-label input-sm">Última atualização</label> 
+            <div class="col-sm-2 ">
+                <input class="form-control input-sm" readonly="readonly" type="text" name="ordem.sysUpdateDate" value="02/06/2014 12:35:02"  size="25" maxlength="25"/>
+            </div>
+        </div> 
+        <div class="form-group">
+            <label class="col-sm-1 control-label input-sm" >Info</label> 
+            <div class="col-sm-4 ">
+                <textarea class="form-control" name="ordem.info"  ></textarea>
+            </div>    
+        </div> 
+
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-1">
+                <input class="btn btn-primary btn-sm" type="submit"   value="Salvar" /> 
+                <span class="help-block input-sm">(Alt + S)</span>  
+            </div>
+            <div class="col-sm-2">
+                <input class="btn btn-primary btn-sm" type="submit"  name="updateCommit" value="Finalizar Ordem" />
+            </div>
+        </div>
+        
+        </fieldset>         
+    </form> 
+    
+
+<!-- #################################################################################### -->
+
+
+    <form  class="form-horizontal " action="" method="post" >
+           
+        <fieldset>
+        <legend class="">Dados da Ordem</legend> 
+        
+        
+        <input type="hidden" name="ordem.reopened" value="false"   />
+                            
+        <div class="form-group f-bs-static">
+                <label class="control-label input-sm" >Ordem</label> 
+                <span class="">2779</span>
+                <span class="">Robson Emerik</span>
+                <span class="">aberta</span>
+                <span class="">re-aberta</span>
+                <a href="">Alterar Cliente*</a>
+        </div>                                   
+        
+        <div class="form-group form-inline">        
+           <label class="control-label  input-sm" >Valor Total</label> 
+                <input  class="form-control input-sm" readonly="readonly" type="text" size="10" name="ordem.valorTotal" value="0.00"  maxlength="10" />
+                <span class="input-sm" >(-5%) 0.00 (-10%) 0.00</span>
+        </div>                        
+        <div class="form-group form-inline">
+            <label class=" control-label input-sm" >Valor Negociado</label>
+                <input class="form-control input-sm" type="text" name="ordem.valorNegociado" value="0.00" size="10" maxlength="10" />
+            <label class=" control-label input-sm" >Troco</label>
+                <input class="form-control input-sm" type="text" name="ordem.troco" value=""  size="10" maxlength="10" />
+            <label class=" control-label input-sm" >Crédito Gerado</label> 
+                <input class="form-control input-sm" type="text" name="ordem.creditoGerado" value="" size="10" maxlength="10" />
+            <label class=" control-label input-sm" >Debito Gerado</label> 
+                <input class="form-control input-sm" type="text" name="ordem.debitoGerado" value="" size="10"  maxlength="10" />                   
+                <span class="blue-text">SALDO: OK</span>
+        </div> 
+        <div class="form-group form-inline">
+            <label class="control-label input-sm" >Total Cheque</label> 
+                <input class="form-control input-sm" readonly="readonly" type="text" name="ordem.totalCheque" value="0.00"  size="10" maxlength="10" />
+            <label class="control-label input-sm" >Total Dinheiro</label> 
+                <input class="form-control input-sm" type="text" name="ordem.totalDinheiro" value=""  size="10" maxlength="10" />
+            <label class="control-label input-sm" >Total Cartao</label> 
+                <input class="form-control input-sm" type="text" name="ordem.totalCartao" value=""  size="10" maxlength="10" />
+            <label class="control-label input-sm" >Crédito Usado</label> 
+                <input class="form-control input-sm" type="text" name="ordem.creditoUsado" value=""  size="10" maxlength="10" />
+                <span class="green-text">Crédito disponível: 0.0 SALDO: OK</span>
+        </div> 
+        <div class="form-group">
+            <label class="col-sm-1 control-label input-sm" >Data da Ordem</label>            
+            <div class="col-sm-2 ">
+                <input class="form-control input-sm" type="date"  name="ordem.ordemDate" value="02/06/2014" size="15" />
+            </div>
+
+            <label class="col-sm-1 control-label input-sm">Data de Criação</label> 
+            <div class="col-sm-2 ">
+                <input class="form-control input-sm" readonly="readonly" type="text" name="ordem.sysCreationDate" value="02/06/2014 12:35:02"  size="25" maxlength="25"/>
+            </div>        
+            <label class="col-sm-1 control-label input-sm">Última atualização</label> 
+            <div class="col-sm-2 ">
+                <input class="form-control input-sm" readonly="readonly" type="text" name="ordem.sysUpdateDate" value="02/06/2014 12:35:02"  size="25" maxlength="25"/>
+            </div>
+        </div> 
+        <div class="form-group">
+            <label class="col-sm-1 control-label input-sm" >Info</label> 
+            <div class="col-sm-4 ">
+                <textarea class="form-control" name="ordem.info"  ></textarea>
+            </div>    
+        </div> 
+
+        <div class="form-group ">
+            <div class="col-sm-offset-1 col-sm-2">
+                <input class="btn btn-primary btn-sm" type="submit"   value="Salvar" /> 
+                <span class="help-block input-sm">(Alt + S)</span>  
+            </div>
+            <div class="col-sm-2">
+                <input class="btn btn-primary btn-sm" type="submit"  name="updateCommit" value="Finalizar Ordem" />
+            </div>
+        </div>
+        
+        </fieldset>         
+    </form> 
+
+
+
+<!-- #################################################################################### -->
+
+   
+    
+    <legend>Ordens</legend> 
+    
+        
+        <div >           
+        <form id="fOrdem" class="f-form" action="Ordem.view.action" method="get" style="margin-Top:5px;margin-bottom:5px;">   
+            <input type="hidden" name="idCliente" value="610" /> 
+            <input type="hidden" name="id" value="0" /> 
+            <input type="hidden" name="addBreadcrumb" value="3" />
+            <input type="submit" value="Nova Ordem" />
+            <label> (Alt + O)</label>
+        </form>
+        </div>
+         
+ 
+ 
+    <div class="table-responsive">
+    <!--outros:  table-hover -->
+    <table id="example" class="table table-striped table-bordered table-condensed "> 
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Status</th>
+            <th>Valor Total</th>
+            <th>Valor Negociado</th>        
+            <th>Total Cheque</th> 
+            <th>Total Dinheiro</th> 
+            <th>Total Cartao</th> 
+            <th>Crédito Usado</th>
+            <th>Crédito Gerado</th>
+            <th>Débito Gerado</th>
+            <th>Num. Itens</th>  
+            <th>Num. Cheques</th>    
+            <th>Orç</th>                                                                   
+            <th>Data da Ordem</th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td><a href="/flora/p1/Ordem.view.action?id=2778&addBreadcrumb=3">2778</a> </td>
+                <td>fechada</td>
+                <td>960.00</td>
+                <td>950.00</td>
+                <td>0.00</td>
+                <td>950.00</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>1</td>
+                <td>0</td>
+                <td><input DISABLED type='checkbox'   /> </td>
+                <td>02/06/2014</td>     
+                <td>
+                            <form class="f-form" id="adm2778" action="Ordem.reabrir.action" method="post">
+                                <input type="hidden" name="id" value="2778" /> 
+                                <input type="hidden" name="addBreadcrumb" value="3" />
+                                <input type="button" onclick="alertaPreventivo2('adm2778','2778')" value="RE-ABRIR!" />
+                            </form>                             
+               </td>
+            </tr>
+        
+            <tr>
+                <td><a href="/flora/p1/Ordem.view.action?id=2721&addBreadcrumb=3">2721</a> </td>
+                <td>fechada</td>
+                <td>840.00</td>
+                <td>840.00</td>
+                <td>0.00</td>
+                <td>840.00</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>1</td>
+                <td>0</td>
+                <td><input DISABLED type='checkbox'   /> </td>
+                <td>16/05/2014</td>     
+                <td>
+                            <form class="f-form" id="adm2721" action="Ordem.reabrir.action" method="post">
+                                <input type="hidden" name="id" value="2721" /> 
+                                <input type="hidden" name="addBreadcrumb" value="3" />
+                                <input type="button" onclick="alertaPreventivo2('adm2721','2721')" value="RE-ABRIR!" />
+                            </form>                             
+               </td>
+            </tr>
+        
+            <tr>
+                <td><a href="/flora/p1/Ordem.view.action?id=2125&addBreadcrumb=3">2125</a> </td>
+                <td>fechada</td>
+                <td>175.00</td>
+                <td>174.00</td>
+                <td>0.00</td>
+                <td>174.00</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>1</td>
+                <td>0</td>
+                <td><input DISABLED type='checkbox'   /> </td>
+                <td>27/11/2013</td>     
+                <td>
+                            <form class="f-form" id="adm2125" action="Ordem.reabrir.action" method="post">
+                                <input type="hidden" name="id" value="2125" /> 
+                                <input type="hidden" name="addBreadcrumb" value="3" />
+                                <input type="button" onclick="alertaPreventivo2('adm2125','2125')" value="RE-ABRIR!" />
+                            </form>                             
+               </td>
+            </tr>
+        
+        </tbody>
+    </table>
+    
+    </div>
+    
+
+
+ <div class="table-responsive">   
+    <table class="footable table "> 
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Status</th>
+            <th>Valor Total</th>
+            <th data-hide="phone,tablet">Valor Negociado</th>        
+            <th data-hide="phone,tablet">Total Cheque</th> 
+            <th data-hide="phone,tablet">Total Dinheiro</th> 
+            <th data-hide="phone,tablet">Total Cartao</th> 
+            <th data-hide="phone,tablet">Crédito Usado</th>
+            <th data-hide="phone">Crédito Gerado</th>
+            <th data-hide="phone">Débito Gerado</th>
+            <th data-hide="phone,tablet">Num. Itens</th>  
+            <th data-hide="phone,tablet">Num. Cheques</th>    
+            <th data-hide="phone,tablet">Orç</th>                                                                   
+            <th>Data da Ordem</th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td><a href="/flora/p1/Ordem.view.action?id=2778&addBreadcrumb=3">2778</a> </td>
+                <td>fechada</td>
+                <td>960.00</td>
+                <td>950.00</td>
+                <td>0.00</td>
+                <td>950.00</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>1</td>
+                <td>0</td>
+                <td><input DISABLED type='checkbox'   /> </td>
+                <td>02/06/2014</td>     
+                <td>
+                            <form class="f-form" id="adm2778" action="Ordem.reabrir.action" method="post">
+                                <input type="hidden" name="id" value="2778" /> 
+                                <input type="hidden" name="addBreadcrumb" value="3" />
+                                <input type="button" onclick="alertaPreventivo2('adm2778','2778')" value="RE-ABRIR!" />
+                            </form>                             
+               </td>
+            </tr>
+        
+            <tr>
+                <td><a href="/flora/p1/Ordem.view.action?id=2721&addBreadcrumb=3">2721</a> </td>
+                <td>fechada</td>
+                <td>840.00</td>
+                <td>840.00</td>
+                <td>0.00</td>
+                <td>840.00</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>1</td>
+                <td>0</td>
+                <td><input DISABLED type='checkbox'   /> </td>
+                <td>16/05/2014</td>     
+                <td>
+                            <form class="f-form" id="adm2721" action="Ordem.reabrir.action" method="post">
+                                <input type="hidden" name="id" value="2721" /> 
+                                <input type="hidden" name="addBreadcrumb" value="3" />
+                                <input type="button" onclick="alertaPreventivo2('adm2721','2721')" value="RE-ABRIR!" />
+                            </form>                             
+               </td>
+            </tr>
+        
+            <tr>
+                <td><a href="/flora/p1/Ordem.view.action?id=2125&addBreadcrumb=3">2125</a> </td>
+                <td>fechada</td>
+                <td>175.00</td>
+                <td>174.00</td>
+                <td>0.00</td>
+                <td>174.00</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>1</td>
+                <td>0</td>
+                <td><input DISABLED type='checkbox'   /> </td>
+                <td>27/11/2013</td>     
+                <td>
+                            <form class="f-form" id="adm2125" action="Ordem.reabrir.action" method="post">
+                                <input type="hidden" name="id" value="2125" /> 
+                                <input type="hidden" name="addBreadcrumb" value="3" />
+                                <input type="button" onclick="alertaPreventivo2('adm2125','2125')" value="RE-ABRIR!" />
+                            </form>                             
+               </td>
+            </tr>
+        
+        </tbody>
+    </table>    
+</div>
+
+<script type="text/javascript">
+    $(function() {
+      $('.footable').footable();
+    });
+</script>    
+
+
+
+
+
+	<form class="f-form" action="" method="get">
+		Number : <input type="number" min="0" max="10" step= "1" value="5"  /><br>
+		Number : <input type="number" value="12.4" step="0.2" min="0" max="20" /><br>
+		
+		Local Date and Time : <input type="datetime-local"   /><br>
+		Date : <input type="date"   /><br>
+		Time : <input type="time"   /><br>
+		
+		Range : <input type="range" min="0" max="10" step= "1" value="5"   /><br>
+		Range : <input type="range"  value="12.4" step="0.2" min="0" max="20" /><br>
+		
+		email : <input type="email"   /><br>
+		URL : <input type="url"  /><br>
+		
+		TEL : <input type="tel"   /><br>
+		search: <input type="search"   /><br>
+		color: <input type="color"   /><br>
+		
+		placeholder: <input type="text" name="search" placeholder="search the web"/><br>
+		placeholder js:  <input type="text" value="Search here" onfocus="if(this.value=='Search here')this.value=''  "><br>
+		
+        <p> 
+        <label >Classificação</label> 
+        <select name="cliente.classificacao">   
+             <option selected="selected">não classificado</option>
+             <option>confiável</option>
+             <option>especial</option>
+             <option>segurança</option>
+        </select>
+        </p>
+        
+        <!--     
+		autofocus: <input type="text" name="search" autofocus/><br>
+        -->
+		required: <input type="text" name="search" required/><br>
+		 
+		CEP: <input name="CEP" id="CEP" required pattern="\d{5}-?\d{3}" /><br>
+		
+		datalist: <input list="browsers"><br>
+		
+		<datalist id="browsers">
+		  <option value="Internet Explorer">
+		  <option value="Firefox">
+		  <option value="Chrome">
+		  <option value="Opera">
+		  <option value="Safari">
+		</datalist>
+		
+		<input type="submit" value="submit" />
+	</form>
+	
+  <br><br>
+	<form  class="f-form" >
+	   CPF  Custom: <input name="cpf" oninput="vCPF(this)" /> <br>
+	  <input type="submit" value="Enviar" />
+	</form>
+       
+<!--   novalidate e formnovalidate
+Podem haver situações em que você precisa que um formulário não seja validado. Nestes casos, 
+basta incluir no elemento form o atributo novalidate.
+Outra situação comum é querer que o formulário não seja validado dependendo da ação de submit. 
+Nesse caso, você pode usar no botão de submit o atributo formnovalidate. 
+-->
+<br><br>
+<form class="f-form" novalidate>
+nome: <input name="nome" required><br>
+<input type="submit" name="action" value="Salvar rascunho" formnovalidate>
+<input type="submit" name="action" value="Enviar">
+</form>
+        
+	<br><br><br><br><br>
+
+
+</div> <!-- end main container -->
+
+   
+
+<div id="footer" >
+    <span class="text-muted">Copyright &copy; CMS 2013-2014</span>
+</div>   
+   
+   
+</body>
+</html>
+
+
+
+
+
+
